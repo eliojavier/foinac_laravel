@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-3">
             <div class="panel panel-primary">
                 <div class="panel-heading text-center">Registrar pago</div>
                 <div class="panel-body">
