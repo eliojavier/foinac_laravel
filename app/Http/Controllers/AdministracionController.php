@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class AdministracionController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	public function acciones()
 	{
 		$result = DB::select('SELECT stockholders.name AS accionista, COUNT(stockholders.name) AS numacciones, SUM(stocks.monto) montoinversion

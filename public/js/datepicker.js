@@ -23,7 +23,10 @@ $(function () {
 $(function() {
      $( "#datepicker" ).datepicker({
          changeMonth: true,
-         changeYear: true
+         changeYear: true,
+         yearRange: "2000:+nn",
+         defaultDate: "today",
+
      });
 });
 $("#datepicker").attr( 'readOnly' , 'true' );
