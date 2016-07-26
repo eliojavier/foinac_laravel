@@ -8,14 +8,17 @@
                     <div class="panel-heading text-center">Préstamos</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th> Accionista</th>
-                                    <th> Monto préstamo</th>
-                                    <th> Pagos realizados</th>
-                                    <th> Deuda actual</th>
-                                    <th> Fecha</th>
-                                </tr>
+                            <table class="table" id="prestamos">
+                                <thead>
+                                    <tr>
+                                        <th> Accionista</th>
+                                        <th> Monto préstamo</th>
+                                        <th> Pagos realizados</th>
+                                        <th> Deuda actual</th>
+                                        <th> Fecha</th>
+                                    </tr>
+                                </thead>
+
                                 @foreach($result as $r)
                                     <tr>
                                         <td>{{$r->accionista}}</td>

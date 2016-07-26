@@ -8,14 +8,63 @@
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/mycss.css') }}" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/js/datepicker.js') }}"> </script>
     <script src="{{ asset('/js/vue.js') }}"> </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#prestamos').DataTable( {
+                "language": {
+                    "lengthMenu": " ",
+                    "zeroRecords": "No encontrado",
+                    "info": "Mostrando páginas _PAGE_ de _PAGES_",
+                    "infoEmpty": "Ningún registro disponible",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "paginate": {
+                        "first":      "Primera",
+                        "last":       "Última",
+                        "next":       "Próxima",
+                        "previous":   "Anterior"
+                    }
+                },
+                "bFilter" : true,
+                "bInfo" : true
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#acciones').DataTable( {
+                "language": {
+                    "lengthMenu": " ",
+                    "zeroRecords": "No encontrado",
+                    "info": "Mostrando páginas _PAGE_ de _PAGES_",
+                    "infoEmpty": "Ningún registro disponible",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "paginate": {
+                        "first":      "Primera",
+                        "last":       "Última",
+                        "next":       "Próxima",
+                        "previous":   "Anterior"
+                    }
+                },
+                "bFilter" : true,
+                "bInfo" : true
+            });
+        });
+    </script>
+
+
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>

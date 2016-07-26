@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class AdministracionController extends Controller {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
 	public function acciones()
 	{
@@ -26,13 +26,7 @@ class AdministracionController extends Controller {
 
     public function prestamos()
     {
-
-//        $result = DB::select('SELECT stockholders.name AS accionista, loans.monto, loans.fecha
-//                                FROM stockholders, loans
-//                                WHERE stockholders.id = loans.stockholder_id
-//                                AND loans.fuePagado = 0
-//                                ORDER BY stockholders.name');
-
+        
         $result = DB::select('SELECT stockholders.name AS accionista, 
                               loans.monto AS monto, 
                               SUM(payments.montoCapital) AS pagoCapital, 

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
+		<div class="col-md-4 col-md-offset-3 col-sm-12 col-xs-12">
+			<div class="panel panel-primary">
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)

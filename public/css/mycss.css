@@ -123,4 +123,8 @@ section{
     padding-left: 15px;
 }
 
+input[type="search"] {
+    border-radius: 5px;
+}
+
 

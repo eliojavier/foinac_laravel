@@ -8,12 +8,14 @@
                     <div class="panel-heading text-center">Acciones</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th> Accionista</th>
-                                    <th> Núm. de acciones</th>
-                                    <th> Monto inversión</th>
-                                </tr>
+                            <table class="table" id="acciones">
+                                <thead>
+                                    <tr>
+                                        <th> Accionista</th>
+                                        <th> Núm. de acciones</th>
+                                        <th> Monto inversión</th>
+                                    </tr>
+                                </thead>
                                 @foreach($result as $r)
                                     <tr>
                                         <td>{{$r->accionista}}</td>

@@ -10,10 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('acciones/create', 'AccionesController@create')->middleware(['validarRegistro']);
-//Route::resource('acciones', 'AccionesController');
-Route::resource('prestamos', 'PrestamosController');
-Route::resource('pagos', 'PagosController');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('acciones', 'AccionesController');
+    Route::resource('prestamos', 'PrestamosController');
+    Route::resource('pagos', 'PagosController');
+});
 
 Route::get('administracion/acciones', 'AdministracionController@acciones');
 Route::get('administracion/prestamos', 'AdministracionController@prestamos');
