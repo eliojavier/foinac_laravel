@@ -8,15 +8,11 @@ use App\Payment;
 use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Array_;
 
 class PagosController extends Controller {
-
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
 
 	/**
 	 * Display a listing of the resource.
@@ -25,7 +21,9 @@ class PagosController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $result = DB::select('');
+
+        return view('administracion.pagos', compact('result'));
 	}
 
 	/**
@@ -35,40 +33,44 @@ class PagosController extends Controller {
 	 */
 	public function create()
 	{
-		$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
-									FROM stockholders sh, loans l
-									WHERE sh.id = l.stockholder_id');
+		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+			$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
+										FROM stockholders sh, loans l
+										WHERE sh.id = l.stockholder_id');
 
 
-        $prestamos = array();
-        $ids = array();
+			$prestamos = array();
+			$ids = array();
 
-//        foreach ($result as $key=>$value){
-//            echo($key);
-//            echo("salto");
-//        }
+			//        foreach ($result as $key=>$value){
+			//            echo($key);
+			//            echo("salto");
+			//        }
 
-        foreach ($result as $r){
+			foreach ($result as $r) {
 
-                echo($r->prestamo);
-                echo($r->id);
-               $prestamos = array_add($prestamos, $r->id, $r->prestamo);
+//				echo($r->prestamo);
+//				echo($r->id);
+				$prestamos = array_add($prestamos, $r->id, $r->prestamo);
 
-        }
+			}
 
-        foreach ($result as $r){
-            foreach ($r as $k){
-                $ids = array_add($ids,$r->id, null);
-            }
-        }
+//			foreach ($result as $r) {
+//				foreach ($r as $k) {
+//					$ids = array_add($ids, $r->id, null);
+//				}
+//			}
 
-//        foreach ($result as $r){
-//            $prestamos[] = $r->prestamo ;
-//            $prestamos[] = $r->id;
-//        }
+			//        foreach ($result as $r){
+			//            $prestamos[] = $r->prestamo ;
+			//            $prestamos[] = $r->id;
+			//        }
 
 
-		return view ('pagos/create', compact('prestamos'));
+			return view('pagos/create', compact('prestamos'));
+		}
+
+		return redirect('home');
 	}
 
 	/**

@@ -7,6 +7,8 @@ use App\Loan;
 use App\Stockholder;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PrestamosController extends Controller {
 
@@ -17,7 +19,19 @@ class PrestamosController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $result = DB::select
+                            ('SELECT stockholders.name AS accionista, 
+                              loans.monto AS monto, 
+                              SUM(payments.montoCapital) AS pagoCapital, 
+                              (loans.monto - SUM(payments.montoCapital)) AS deuda,
+                              loans.fecha AS fecha
+                                FROM stockholders, loans, payments
+                                WHERE stockholders.id = loans.stockholder_id AND 
+                                      loans.id = payments.loan_id AND 
+                                      loans.fuePagado = 0
+                                ORDER BY stockholders.name');
+
+        return view('prestamos.show', compact('result'));
 	}
 
 	/**
@@ -27,9 +41,12 @@ class PrestamosController extends Controller {
 	 */
 	public function create()
 	{
-		$stockholders = Stockholder::lists('name', 'id');
+        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+            $stockholders = Stockholder::lists('name', 'id');
 
-		return view ('prestamos/create', compact('stockholders'));
+            return view('prestamos/create', compact('stockholders'));
+        }
+        return redirect('home');
 	}
 
 	/**
@@ -52,6 +69,8 @@ class PrestamosController extends Controller {
 		$loan->monto = $request->monto;
 
 		$loan->save();
+
+        return redirect('prestamos');
 	}
 
 	/**

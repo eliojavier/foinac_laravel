@@ -19,52 +19,7 @@
     <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/js/datepicker.js') }}"> </script>
     <script src="{{ asset('/js/vue.js') }}"> </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#prestamos').DataTable( {
-                "language": {
-                    "lengthMenu": " ",
-                    "zeroRecords": "No encontrado",
-                    "info": "Mostrando páginas _PAGE_ de _PAGES_",
-                    "infoEmpty": "Ningún registro disponible",
-                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "paginate": {
-                        "first":      "Primera",
-                        "last":       "Última",
-                        "next":       "Próxima",
-                        "previous":   "Anterior"
-                    }
-                },
-                "bFilter" : true,
-                "bInfo" : true
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#acciones').DataTable( {
-                "language": {
-                    "lengthMenu": " ",
-                    "zeroRecords": "No encontrado",
-                    "info": "Mostrando páginas _PAGE_ de _PAGES_",
-                    "infoEmpty": "Ningún registro disponible",
-                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "paginate": {
-                        "first":      "Primera",
-                        "last":       "Última",
-                        "next":       "Próxima",
-                        "previous":   "Anterior"
-                    }
-                },
-                "bFilter" : true,
-                "bInfo" : true
-            });
-        });
-    </script>
-
-
+    <script src="{{ asset('/js/datatable.js') }}"> </script>
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -99,7 +54,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/auth/logout') }}">Cerrar Sesión</a></li>
 							</ul>
 						</li>
 					@endif
@@ -121,19 +76,19 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Inicio<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                    <li class="active"><a href="{{URL::to('acciones')}}">Inicio<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones<span class="caret"></span></a>
                         <ul class="dropdown-menu forAnimate" role="menu">
                             <li><a href="{{URL::to('acciones/create')}}">Registrar</a></li>
-                            <li><a href="{{URL::to('administracion/acciones')}}">Resumen</a></li>
+                            <li><a href="{{URL::to('acciones')}}">Resumen</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Préstamos<span class="caret"></span></a>
                         <ul class="dropdown-menu forAnimate" role="menu">
                             <li><a href="{{URL::to('prestamos/create')}}">Registrar</a></li>
-                            <li><a href="{{URL::to('administracion/prestamos')}}">Resumen</a></li>
+                            <li><a href="{{URL::to('prestamos')}}">Resumen</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -9,6 +9,7 @@ use App\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AccionesController extends Controller {
@@ -20,7 +21,12 @@ class AccionesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $result = DB::select('SELECT stockholders.name AS accionista, COUNT(stockholders.name) AS numacciones, SUM(stocks.monto) montoinversion
+                                FROM stockholders, stocks
+                                WHERE stockholders.id = stocks.stockholder_id
+                                GROUP BY stockholders.name');
+
+        return view('acciones.show', compact('result'));
 	}
 
 	/**
@@ -30,9 +36,13 @@ class AccionesController extends Controller {
 	 */
 	public function create()
 	{
-		$stockholders = Stockholder::lists('name', 'id');
+		if(Auth::user()->id == 1 or Auth::user()->id == 2){
+            $stockholders = Stockholder::lists('name', 'id');
+            return view ('acciones/create', compact('stockholders'));
+        }
 
-		return view ('acciones/create', compact('stockholders'));
+        return redirect('home');
+
 	}
 
 	/**
