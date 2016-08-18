@@ -95,6 +95,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pagos<span class="caret"></span></a>
                         <ul class="dropdown-menu forAnimate" role="menu">
                             <li><a href="{{URL::to('pagos/create')}}">Registrar</a></li>
+                            <li><a href="{{URL::to('pagos')}}">Resumen</a></li>
                         </ul>
                     </li>
 

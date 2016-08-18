@@ -25,7 +25,7 @@ class PagosController extends Controller {
 									payments.fecha AS fecha,
                               		loans.monto AS prestamo,
                               		payments.montoCapital AS pagoCapital,
-                              		payments.montoInteres AS pagosInteres
+                              		payments.montoInteres AS pagoInteres
                               FROM stockholders, loans, payments
                               WHERE stockholders.id = loans.stockholder_id AND 
 									payments.loan_id = loans.id AND
