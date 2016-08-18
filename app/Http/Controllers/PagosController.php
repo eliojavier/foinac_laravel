@@ -21,9 +21,18 @@ class PagosController extends Controller {
 	 */
 	public function index()
 	{
-        $result = DB::select('');
+        $result = DB::select('SELECT stockholders.name AS accionista, 
+									payments.fecha AS fecha,
+                              		loans.monto AS prestamo,
+                              		payments.montoCapital AS pagoCapital,
+                              		payments.montoInteres AS pagosInteres
+                              FROM stockholders, loans, payments
+                              WHERE stockholders.id = loans.stockholder_id AND 
+									payments.loan_id = loans.id AND
+                                    loans.fuePagado = 0
+                              ORDER BY stockholders.name');
 
-        return view('administracion.pagos', compact('result'));
+		return view('pagos.index', compact('result'));
 	}
 
 	/**
@@ -95,9 +104,6 @@ class PagosController extends Controller {
 		$payment->montoCapital = $request->montoCapital;
 
 		$payment->save();
-		
-		
-
         
 	}
 

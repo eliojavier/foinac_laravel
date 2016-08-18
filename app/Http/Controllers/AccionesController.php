@@ -26,7 +26,7 @@ class AccionesController extends Controller {
                                 WHERE stockholders.id = stocks.stockholder_id
                                 GROUP BY stockholders.name');
 
-        return view('acciones.show', compact('result'));
+        return view('acciones.index', compact('result'));
 	}
 
 	/**

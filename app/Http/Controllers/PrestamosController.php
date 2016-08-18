@@ -21,17 +21,18 @@ class PrestamosController extends Controller {
 	{
         $result = DB::select
                             ('SELECT stockholders.name AS accionista, 
-                              loans.monto AS monto, 
-                              SUM(payments.montoCapital) AS pagoCapital, 
-                              (loans.monto - SUM(payments.montoCapital)) AS deuda,
-                              loans.fecha AS fecha
-                                FROM stockholders, loans, payments
-                                WHERE stockholders.id = loans.stockholder_id AND 
-                                      loans.id = payments.loan_id AND 
-                                      loans.fuePagado = 0
-                                ORDER BY stockholders.name');
+										loans.fecha AS fecha,
+                              			loans.monto AS prestamo,
+                              			SUM(payments.montoCapital) AS pagos,
+                              			(loans.monto - SUM(payments.montoCapital)) AS deuda,
+                              			SUM(payments.montoInteres) AS interesespagados
+                              FROM stockholders, loans, payments
+                              WHERE stockholders.id = loans.stockholder_id AND 
+									payments.loan_id = loans.id AND
+                                    loans.fuePagado = 0
+                              ORDER BY stockholders.name');
 
-        return view('prestamos.show', compact('result'));
+        return view('prestamos.index', compact('result'));
 	}
 
 	/**
