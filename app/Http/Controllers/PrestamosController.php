@@ -29,7 +29,8 @@ class PrestamosController extends Controller {
 								FROM stockholders INNER JOIN loans ON stockholders.id = loans.stockholder_id
 								LEFT JOIN payments ON payments.loan_id = loans.id 
 								WHERE loans.fuePagado = 0
-                              	ORDER BY stockholders.name');
+								GROUP BY loans.id
+                              	ORDER BY stockholders.name, loans.fecha');
 
         return view('prestamos.index', compact('result'));
 	}
