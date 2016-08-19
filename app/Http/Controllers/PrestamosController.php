@@ -26,11 +26,10 @@ class PrestamosController extends Controller {
                               			SUM(payments.montoCapital) AS pagos,
                               			(loans.monto - SUM(payments.montoCapital)) AS deuda,
                               			SUM(payments.montoInteres) AS interesespagados
-                              FROM stockholders, loans, payments
-                              WHERE stockholders.id = loans.stockholder_id AND 
-									payments.loan_id = loans.id AND
-                                    loans.fuePagado = 0
-                              ORDER BY stockholders.name');
+								FROM stockholders INNER JOIN loans ON stockholders.id = loans.stockholder_id
+								LEFT JOIN payments ON payments.loan_id = loans.id 
+								WHERE loans.fuePagado = 0
+                              	ORDER BY stockholders.name');
 
         return view('prestamos.index', compact('result'));
 	}
