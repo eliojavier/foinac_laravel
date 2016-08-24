@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Loan;
+use App\Payment;
 use App\Stockholder;
 use DateTime;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class PrestamosController extends Controller {
 	 */
 	public function index()
 	{
-        $result = DB::select ('SELECT stockholders.name AS accionista, 
+        $result = DB::select ('SELECT 	loans.id AS id,
+ 										stockholders.name AS accionista, 
 										loans.fecha AS fecha,
                               			loans.monto AS prestamo,
                               			SUM(payments.montoCapital) AS pagos,
@@ -96,7 +98,9 @@ class PrestamosController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$loan = Loan::find($id);
+		$payments = Payment::where('loan_id', '=', $id)->get();
+		 return view ('prestamos/show', compact('loan', 'payments'));
 	}
 
 	/**

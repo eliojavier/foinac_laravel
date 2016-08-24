@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
@@ -12,8 +13,13 @@ class Stock extends Model
         return $this->belongsTo('App\Stockholder');
     }
 
-    public function setFechaAtrribute($date)
+    public function getFechaAttribute($value)
     {
-        $this->attributes['fecha'] = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+        return DateTime::createFromFormat('Y-m-d',$value)->format('d/m/Y');
     }
+
+//    public function setFechaAtrribute($date)
+//    {
+//        $this->attributes['fecha'] = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+//    }
 }

@@ -10,26 +10,39 @@
                         <div class="table-responsive">
                             <table class="table" id="prestamos">
                                 <thead>
-                                <tr>
-                                    <th> Accionista</th>
-                                    <th> Fecha</th>
-                                    <th> Monto préstamo</th>
-                                    <th> Pagos realizados</th>
-                                    <th> Deuda actual</th>
-                                    <th> Intereses Pagados</th>
-                                </tr>
-                                </thead>
-
-                                @foreach($result as $r)
                                     <tr>
-                                        <td>{{$r->accionista}}</td>
-                                        <td>{{$r->fecha}}</td>
-                                        <td>{{$r->prestamo}}</td>
-                                        <td>{{$r->pagos}}</td>
-                                        <td><strong>{{$r->deuda}}</strong></td>
-                                        <td>{{$r->interesespagados}}</td>
+                                        <th> Accionista</th>
+                                        <th> Fecha</th>
+                                        <th> Monto préstamo</th>
+                                        <th> Pagos realizados</th>
+                                        <th> Deuda actual</th>
+                                        <th> Intereses Pagados</th>
+                                        <th> Acciones </th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach($result as $r)
+                                        <tr data-id="{{$r->id}}">
+                                            <td>{{$r->accionista}}</td>
+                                            <td>{{$r->fecha}}</td>
+                                            <td>{{$r->prestamo}}</td>
+                                            <td>{{$r->pagos}}</td>
+                                            <td><strong>
+                                                @if($r->pagos == null)
+                                                    {{$r->prestamo}}
+                                                @else
+                                                    {{$r->deuda}}
+                                                @endif
+                                            </strong></td>
+                                            <td>{{$r->interesespagados}}</td>
+                                            <td>
+                                                @if($r->pagos != null)
+                                                    <a class="btn-detalle">Pagos</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -37,4 +50,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $(".btn-detalle").click(function () {
+                var row = $(this).parents("tr");
+                var id = row.data("id");
+                console.log(id);
+                window.location.href = "../prestamos/" + id;
+            });
+        });
+    </script>
 @endsection
