@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Asiento;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -46,39 +47,14 @@ class PagosController extends Controller {
 			$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
 										FROM stockholders sh, loans l
 										WHERE sh.id = l.stockholder_id');
-
-
+			
 			$prestamos = array();
-			$ids = array();
-
-			//        foreach ($result as $key=>$value){
-			//            echo($key);
-			//            echo("salto");
-			//        }
-
+			
 			foreach ($result as $r) {
-
-//				echo($r->prestamo);
-//				echo($r->id);
 				$prestamos = array_add($prestamos, $r->id, $r->prestamo);
-
 			}
-
-//			foreach ($result as $r) {
-//				foreach ($r as $k) {
-//					$ids = array_add($ids, $r->id, null);
-//				}
-//			}
-
-			//        foreach ($result as $r){
-			//            $prestamos[] = $r->prestamo ;
-			//            $prestamos[] = $r->id;
-			//        }
-
-
 			return view('pagos/create', compact('prestamos'));
 		}
-
 		return redirect('home');
 	}
 
@@ -96,15 +72,46 @@ class PagosController extends Controller {
             'montoCapital' => 'required'
 		]);
 
-		$payment = new Payment();
+        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+            $payment = new Payment();
+            $payment->loan_id = $request->prestamo;
+            $payment->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $payment->montoInteres = $request->montoInteres;
+            $payment->montoCapital = $request->montoCapital;
+            $payment->save();
 
-		$payment->loan_id = $request->prestamo;
-		$payment->fecha=DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-		$payment->montoInteres = $request->montoInteres;
-		$payment->montoCapital = $request->montoCapital;
+            $result = DB::select('SELECT stockholders.name
+                                    FROM stockholders, loans, payments
+                                    WHERE payments.loan_id = ' . $request->prestamo .
+                                        ' AND payments.loan_id = loans.id
+                                          AND loans.stockholder_id = stockholders.id
+                                    LIMIT 1');
 
-		$payment->save();
-        
+            $accionista = 0;
+
+            foreach ($result as $r){
+                foreach ($r as $k){
+                    $accionista = $k;
+                }
+            }
+
+            $asiento = new Asiento();
+            $asiento->debe = 'Banco';
+            $asiento->haber = 'Cuentas por cobrar';
+            $asiento->monto = $request->montoCapital;
+            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $asiento->descripcion = "Amortización prestamo " .$accionista;
+            $asiento->save();
+
+            $asiento = new Asiento();
+            $asiento->debe = 'Banco';
+            $asiento->haber = 'Intereses por prestamo';
+            $asiento->monto = $request->montoInteres;
+            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $asiento->descripcion = "Pago intereses préstamo " .$accionista;
+            $asiento->save();
+        }
+        return redirect('pagos');
 	}
 
 	/**
@@ -150,5 +157,4 @@ class PagosController extends Controller {
 	{
 		//
 	}
-
 }

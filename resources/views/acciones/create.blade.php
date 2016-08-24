@@ -1,4 +1,9 @@
 @extends('app')
+
+@section('title')
+    Registrar acción
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">

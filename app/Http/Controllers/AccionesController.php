@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Asiento;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -21,7 +22,10 @@ class AccionesController extends Controller {
 	 */
 	public function index()
 	{
-        $result = DB::select('SELECT stockholders.name AS accionista, COUNT(stockholders.name) AS numacciones, SUM(stocks.monto) montoinversion
+        $result = DB::select('SELECT 	stockholders.id AS id, 
+										stockholders.name AS accionista, 
+										COUNT(stockholders.name) AS numacciones, 
+										SUM(stocks.monto) AS montoinversion
                                 FROM stockholders, stocks
                                 WHERE stockholders.id = stocks.stockholder_id
                                 GROUP BY stockholders.name');
@@ -42,7 +46,6 @@ class AccionesController extends Controller {
         }
 
         return redirect('home');
-
 	}
 
 	/**
@@ -58,15 +61,33 @@ class AccionesController extends Controller {
 			'n_acciones' => 'required',
 			'monto' => 'required'
 		]);
-        
-        for ($i=0; $i<$request->n_acciones; $i++){
-            $stock = new Stock();
 
-            $stock->stockholder_id = $request->accionista;
-            $stock->fecha=DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $stock->monto = 300;
-            $stock->save();
+		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+            for ($i = 0; $i < $request->n_acciones; $i++) {
+                $stock = new Stock();
+
+                $stock->stockholder_id = $request->accionista;
+                $stock->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+                $stock->monto = 300;
+                $stock->save();
+            }
+
+			$result = Stockholder::where('id', '=', $request->accionista )->lists('name');
+
+			$accionista = 0;
+			foreach ($result as $r){
+				$accionista = $r;
+			}
+
+            $asiento = new Asiento();
+            $asiento->debe = 'Banco';
+            $asiento->haber = 'Capital';
+            $asiento->monto = $request->monto;
+            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $asiento->descripcion = "Compra de " . $request->n_acciones . " acciones " . $accionista;
+            $asiento->save();
         }
+        return redirect('acciones');
 	}
 
 	/**

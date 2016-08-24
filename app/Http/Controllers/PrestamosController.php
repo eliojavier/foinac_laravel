@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Asiento;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -19,8 +20,7 @@ class PrestamosController extends Controller {
 	 */
 	public function index()
 	{
-        $result = DB::select
-                            ('SELECT stockholders.name AS accionista, 
+        $result = DB::select ('SELECT stockholders.name AS accionista, 
 										loans.fecha AS fecha,
                               			loans.monto AS prestamo,
                               			SUM(payments.montoCapital) AS pagos,
@@ -63,14 +63,28 @@ class PrestamosController extends Controller {
 			'monto' => 'required'
 		]);
 
-		$loan = new Loan();
+        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+            $loan = new Loan();
+            $loan->stockholder_id = $request->accionista;
+            $loan->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $loan->monto = $request->monto;
+            $loan->save();
 
-		$loan->stockholder_id = $request->accionista;
-		$loan->fecha=DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-		$loan->monto = $request->monto;
+			$result = Stockholder::where('id', '=', $request->accionista )->lists('name');
 
-		$loan->save();
+			$accionista = 0;
+			foreach ($result as $r){
+				$accionista = $r;
+			}
 
+            $asiento = new Asiento();
+            $asiento->debe = 'Cuentas por cobrar';
+            $asiento->haber = 'Banco';
+            $asiento->monto = $request->monto;
+            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+            $asiento->descripcion = "Prestamo " .$accionista . " por monto de " . $request->monto;
+            $asiento->save();
+        }
         return redirect('prestamos');
 	}
 

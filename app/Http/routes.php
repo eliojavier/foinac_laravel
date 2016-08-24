@@ -17,10 +17,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('pagos', 'PagosController');
 });
 
-//Route::get('administracion/acciones', 'AdministracionController@acciones');
-//Route::get('administracion/prestamos', 'AdministracionController@prestamos');
-//Route::get('administracion/pagos', 'AdministracionController@pagos');
-
 Route::get('/', 'AccionesController@index');
 Route::get('home', 'AccionesController@index');
 

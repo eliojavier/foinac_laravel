@@ -8,7 +8,7 @@
 <div class="form-group">
     {!! Form::label('fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-3">
-        {!! Form::text('fecha', '', ['id' => 'datepicker']) !!}
+        {!! Form::text('fecha', '', ['id' => 'datepicker', 'readonly']) !!}
     </div>
 </div>
 
