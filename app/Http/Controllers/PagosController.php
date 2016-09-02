@@ -23,7 +23,7 @@ class PagosController extends Controller {
 	public function index()
 	{
         $result = DB::select('SELECT stockholders.name AS accionista, 
-									payments.fecha AS fecha,
+									DATE_FORMAT(payments.fecha, "%d/%m/%Y") AS fecha,
                               		loans.monto AS prestamo,
                               		payments.montoCapital AS pagoCapital,
                               		payments.montoInteres AS pagoInteres
@@ -31,7 +31,7 @@ class PagosController extends Controller {
                               WHERE stockholders.id = loans.stockholder_id AND 
 									payments.loan_id = loans.id AND
                                     loans.fuePagado = 0
-                              ORDER BY stockholders.name');
+                              ORDER BY payments.fecha');
 
 		return view('pagos.index', compact('result'));
 	}

@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', 'AccionesController@index');
 Route::get('home', 'AccionesController@index');
 
+Route::get('admin', 'AdminController@index');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

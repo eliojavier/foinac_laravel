@@ -2,7 +2,7 @@
 
 use App\Asiento;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+
 
 use App\Loan;
 use App\Payment;
@@ -23,7 +23,7 @@ class PrestamosController extends Controller {
 	{
         $result = DB::select ('SELECT 	loans.id AS id,
  										stockholders.name AS accionista, 
-										loans.fecha AS fecha,
+										DATE_FORMAT(loans.fecha, "%d/%m/%Y") AS fecha,
                               			loans.monto AS prestamo,
                               			SUM(payments.montoCapital) AS pagos,
                               			(loans.monto - SUM(payments.montoCapital)) AS deuda,
@@ -32,7 +32,7 @@ class PrestamosController extends Controller {
 								LEFT JOIN payments ON payments.loan_id = loans.id 
 								WHERE loans.fuePagado = 0
 								GROUP BY loans.id
-                              	ORDER BY stockholders.name, loans.fecha');
+                              	ORDER BY loans.fecha');
 
         return view('prestamos.index', compact('result'));
 	}
@@ -84,7 +84,7 @@ class PrestamosController extends Controller {
             $asiento->haber = 'Banco';
             $asiento->monto = $request->monto;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Prestamo " .$accionista . " por monto de " . $request->monto;
+            $asiento->descripcion = "Prestamo " . $accionista . " por monto de " . $request->monto;
             $asiento->save();
         }
         return redirect('prestamos');

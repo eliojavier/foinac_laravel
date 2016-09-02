@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $('#prestamos').DataTable( {
+        "ordering": true,
+        "order": [[ 2, "asc" ]],
         "language": {
             "lengthMenu": " ",
             "search": "Buscar:",

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container-fluid">
@@ -16,10 +16,8 @@
                                     <th> Préstamo</th>
                                     <th> Pagos Capital</th>
                                     <th> Pagos Interés</th>
-
                                 </tr>
                                 </thead>
-
                                 @foreach($result as $r)
                                     <tr>
                                         <td>{{$r->accionista}}</td>
