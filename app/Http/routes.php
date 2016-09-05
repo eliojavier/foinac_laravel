@@ -15,10 +15,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('acciones', 'AccionesController');
     Route::resource('prestamos', 'PrestamosController');
     Route::resource('pagos', 'PagosController');
+    Route::resource('interesesbanco', 'InteresBancoController');
+    Route::resource('compradivisas', 'CompraDivisasController');
+    Route::resource('ventadivisas', 'VentaDivisasController');
 });
 
-Route::get('/', 'AccionesController@index');
-Route::get('home', 'AccionesController@index');
+Route::get('/', 'SiteController@index');
+Route::get('home', 'SiteController@index');
+Route::get('index', 'SiteController@index');
 
 Route::get('admin', 'AdminController@index');
 
@@ -26,3 +30,5 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+

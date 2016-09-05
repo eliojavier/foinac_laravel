@@ -1,3 +1,14 @@
+        $(function() {
+            $( "#datepicker" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1920:+nn"
+            });
+        });
+$("#datepicker").attr( 'readOnly' , 'true' );
+$("#datepicker").keypress(function(event) {event.preventDefault();});
+
+    
 $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
     prevText: '<Ant',
@@ -19,16 +30,3 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 $(function () {
     $("#fecha").datepicker();
 });
-
-$(function() {
-     $( "#datepicker" ).datepicker({
-         changeMonth: true,
-         changeYear: true,
-         yearRange: "2000:+nn",
-         defaultDate: "today",
-
-     });
-});
-$("#datepicker").attr( 'readOnly' , 'true' );
-$("#datepicker").keypress(function(event) {event.preventDefault();});
-

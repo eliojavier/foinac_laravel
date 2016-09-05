@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-1 col-sm-12 col-xs-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading text-center">Préstamos</div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -37,7 +37,7 @@
                                             <td>{{$r->interesespagados}}</td>
                                             <td>
                                                 @if($r->pagos != null)
-                                                    <a class="btn-detalle">Pagos</a>
+                                                    <a href="{{url('prestamos/'. $r->id)}}">Pagos</a>
                                                 @endif
                                             </td>
                                         </tr>
@@ -52,15 +52,5 @@
     </div>
 @endsection
 
-@section('scripts')
-    <script>
-        $(document).ready(function () {
-            $(".btn-detalle").click(function () {
-                var row = $(this).parents("tr");
-                var id = row.data("id");
-                console.log(id);
-                window.location.href = "../prestamos/" + id;
-            });
-        });
-    </script>
-@endsection
+
+

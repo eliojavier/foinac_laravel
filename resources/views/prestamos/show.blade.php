@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-md-offset-2 col-sm-12 col-xs-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading text-center">Detalle Pagos</div>
                     <div class="panel-body">
                         <div class="table-responsive">
