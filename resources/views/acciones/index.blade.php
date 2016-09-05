@@ -18,6 +18,7 @@
                                     <th> Eliminar</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 @foreach($result as $r)
                                     <tr data-id="{{$r->id}}">
                                         <td>{{$r->accionista}}</td>
@@ -27,6 +28,7 @@
                                         <td><a href="" class="btn-delete">Eliminar</a></td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

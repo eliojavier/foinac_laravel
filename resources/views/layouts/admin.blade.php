@@ -33,9 +33,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('/js/bootstrap.min.js') }}"> </script>
 
-    <!-- DataTables -->
-    <script src="{{asset('/js/dateTables.min.js')}}" ></script>
-
     <!-- DatePicker -->
     <script src="{{asset('/js/datepicker.js')}}" ></script>
 
@@ -43,6 +40,9 @@
     <script src="{{ asset('/js/plugins/morris/raphael.min.js') }}"> </script>
     <script src="{{ asset('/js/plugins/morris/morris.min.js') }}"> </script>
     <script src="{{ asset('/js/plugins/morris/morris-data.js') }}"> </script>
+
+    <!-- DataTables -->
+    <script src="{{asset('/js/dataTables.min.js')}}" ></script>
 
     <!-- Scripts -->
     <script src="{{ asset('/js/vue.js') }}"> </script>

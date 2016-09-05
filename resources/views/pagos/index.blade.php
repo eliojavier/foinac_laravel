@@ -18,6 +18,7 @@
                                     <th> Pagos Interés</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 @foreach($result as $r)
                                     <tr>
                                         <td>{{$r->accionista}}</td>
@@ -27,6 +28,7 @@
                                         <td>{{$r->pagoInteres}}</td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

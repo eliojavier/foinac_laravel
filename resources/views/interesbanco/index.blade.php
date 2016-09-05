@@ -8,19 +8,21 @@
                     <div class="panel-heading text-center">Intereses banco</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="intereses">
                                 <thead>
                                 <tr>
                                     <th> Fecha</th>
                                     <th> Interés depositado</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 @foreach($result as $r)
                                     <tr>
                                         <td>{{$r->fecha}}</td>
                                         <td>{{$r->monto}}</td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
