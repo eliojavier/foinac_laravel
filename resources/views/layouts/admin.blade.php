@@ -43,12 +43,10 @@
 
     <!-- DataTables -->
     <script src="{{asset('/js/dataTables.min.js')}}" ></script>
+    <script src="{{ asset('/js/MyDataTables.js') }}"> </script>
 
     <!-- Scripts -->
     <script src="{{ asset('/js/vue.js') }}"> </script>
-    <script src="{{ asset('/js/datatable.js') }}"> </script>
-
-    <script src="{{ asset('/js/detallepagos.js') }}"> </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
