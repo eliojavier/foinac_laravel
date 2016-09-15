@@ -59,7 +59,7 @@ class AccionesController extends Controller {
 			'accionista' => 'required',
 			'fecha' => 'required',
 			'n_acciones' => 'required',
-			'monto' => 'required'
+			'monto' => 'required',
 		]);
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
@@ -89,7 +89,7 @@ class AccionesController extends Controller {
         }
         return redirect('acciones');
 	}
-
+gogit 
 	/**
 	 * Display the specified resource.
 	 *

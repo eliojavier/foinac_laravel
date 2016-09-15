@@ -22,7 +22,7 @@
 <div class="form-group">
     {!! Form::label('monto', 'Monto', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-3">
-        {!! Form::text('monto', null, ['class' => 'form-control col-md-3', 'readonly']) !!}
+        {!! Form::text('monto', null, ['class' => 'form-control col-md-3']) !!}
     </div>
 </div>
 
