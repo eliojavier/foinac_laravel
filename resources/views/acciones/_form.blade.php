@@ -1,11 +1,3 @@
-<script>
-    $(document).ready(function(){
-        $("#n_acciones").change(function(){
-            $("#monto").val($("#n_acciones").val() * 300);
-        });
-    });
-</script>
-
 <div class="form-group">
     {!! Form::label('accionista', 'Accionista:', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
@@ -34,3 +26,12 @@
     </div>
 </div>
 
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $("#n_acciones").change(function(){
+                $("#monto").val($("#n_acciones").val() * 300);
+            });
+        });
+    </script>
+@endsection

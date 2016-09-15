@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\BankInterest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\InteresBanco;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class InteresBancoController extends Controller {
 	 */
 	public function index()
 	{
-		$result = InteresBanco::all();
+		$result = BankInterest::all();
 		return view ('interesbanco/index', compact('result'));
 	}
 
@@ -47,7 +47,7 @@ class InteresBancoController extends Controller {
 		]);
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$interesBanco = new InteresBanco();
+			$interesBanco = new BankInterest();
 
 			$interesBanco->monto = $request->monto;
 			$interesBanco->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');

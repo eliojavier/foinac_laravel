@@ -12,7 +12,7 @@ class CreateInteresBancosTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('interes_bancos', function(Blueprint $table)
+		Schema::create('bank_interests', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->float('monto');
@@ -28,7 +28,7 @@ class CreateInteresBancosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('interes_bancos');
+		Schema::drop('bank_interests');
 	}
 
 }

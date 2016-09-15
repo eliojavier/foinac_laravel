@@ -3,7 +3,7 @@
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
-class InteresBanco extends Model {
+class BankInterest extends Model {
 
     public function getFechaAttribute($value)
     {

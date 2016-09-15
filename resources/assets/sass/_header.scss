@@ -1,0 +1,38 @@
+//.auth{
+//  display: none;
+//}
+
+.auth {
+  margin: 0;
+  padding: 15px 0 25px;
+  text-align: center;
+  color: #fff;
+}
+
+
+.logo{
+  margin: 0;
+}
+
+.navbar-default{
+  border:0;
+}
+
+.logo img{
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+}
+.navbar-brand {
+  padding-top: 0;
+  width: 90px;
+  color: white;
+  border-left: solid 30px;
+}
+
+.navbar-nav > li > a{
+  text-transform: capitalize;
+  text-shadow: none !important;
+  font-size: 16pt;
+}
+

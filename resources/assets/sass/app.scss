@@ -1,0 +1,80 @@
+@import "variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "lity";
+@import "fonts";
+@import "forms";
+@import "profile";
+@import "header";
+@import "welcome";
+@import "font-awesome";
+@import "footer";
+@import "media_queries";
+@import "icons";
+
+html,
+body,
+main{
+ min-height: 100vh;
+ font-family: 'Nexa Book', sans-serif;
+}
+
+
+.panel-tec{
+ background-color: #1260c1;
+ border:none;
+ padding: 50px;
+ color: white;
+}
+
+.panel-tec a{
+ color: white !important;
+}
+
+h2, h3, a{
+ font-family: 'Strawberry Muffins', sans-serif;
+}
+
+p{
+ font-size: 12pt;
+}
+
+.top-margin{
+margin-top: 30px;
+}
+
+.bottom-margin{
+  margin-bottom: 30px;
+}
+
+.center{
+ margin: 0 auto;
+}
+
+.bottom{
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+}
+
+.round-border{
+ border-radius: 8px;
+}
+
+.article-title{
+ font-size: 22px;
+ font-family: 'Nexa Book', sans-serif;
+ color: #646464;
+}
+
+.panel-level{
+  font-size: 18px;
+}
+
+.btn-nav{
+  font-size: 18px;
+  letter-spacing: 1.6px;
+}
+
+.nav-tec{
+  letter-spacing: 3px;
+}

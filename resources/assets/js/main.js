@@ -1,0 +1,1 @@
+$(".flash").delay(1000).slideUp(1000);

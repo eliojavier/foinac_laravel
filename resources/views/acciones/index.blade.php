@@ -38,6 +38,7 @@
     </div>
     {!! Form::open(['url' => 'acciones', ':STOCK_ID', 'method'=>'delete', 'id'=>'form-delete']) !!}
     {!! Form::close() !!}
+@endsection
 @section('scripts')
     <script>
         $(document).ready(function () {
@@ -52,4 +53,3 @@
     </script>
 @endsection
 
-@endsection
