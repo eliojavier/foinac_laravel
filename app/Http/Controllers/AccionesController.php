@@ -89,7 +89,7 @@ class AccionesController extends Controller {
         }
         return redirect('acciones');
 	}
-gogit 
+
 	/**
 	 * Display the specified resource.
 	 *

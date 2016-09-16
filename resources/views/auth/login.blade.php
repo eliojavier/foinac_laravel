@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-3 col-sm-12 col-xs-12">
+		<div class="col-lg-4 col-lg-offset-3 col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Inicio de sesión</div>
 				<div class="panel-body">
