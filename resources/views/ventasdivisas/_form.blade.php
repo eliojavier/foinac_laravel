@@ -15,7 +15,7 @@
 <div class="form-group">
     {!! Form::label('moneda', 'Moneda', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-3">
-        {!!Form::select('moneda', $monedas, 0, ['class' => 'form-control col-md-6'])!!}
+        {!!Form::select('moneda', $monedas, null, ['class' => 'form-control col-md-6'])!!}
     </div>
 </div>
 
@@ -25,7 +25,3 @@
         {!! Form::text('fecha', '', ['id' => 'datepicker', 'readonly']) !!}
     </div>
 </div>
-
-{!!Form::hidden('tipo', 'compra')!!}
-
-

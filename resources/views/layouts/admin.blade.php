@@ -183,6 +183,12 @@
                         <li>
                             <a href="{{URL::to('comprasdivisas')}}"><i class="fa fa-fw fa-table"></i>Resumen compras</a>
                         </li>
+                        <li>
+                            <a href="{{URL::to('ventasdivisas/create')}}"><i class="fa fa-fw fa-edit"></i>Registro venta divisas</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('ventasdivisas')}}"><i class="fa fa-fw fa-table"></i>Resumen ventas</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

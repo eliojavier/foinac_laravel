@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VentasDivisasController extends Controller {
 
@@ -14,7 +17,8 @@ class VentasDivisasController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$result = Currency::where('tipo', 'venta')->get();
+		return view('ventasdivisas.index', compact('result'));
 	}
 
 	/**
@@ -24,7 +28,8 @@ class VentasDivisasController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$monedas = array(['dolar' => 'dolar', 'euro' => 'euro']);
+		return view('ventasdivisas.create', compact('monedas'));
 	}
 
 	/**
@@ -32,9 +37,31 @@ class VentasDivisasController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$this->validate($request,[
+			'cantidad' => 'required',
+			'monto' => 'required',
+			'moneda' => 'required',
+			'fecha' => 'required'
+		]);
+
+		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+			$ventaDivisas = new Currency();
+
+			$ventaDivisas->cantidad = $request->cantidad;
+			$ventaDivisas->monto = $request->monto;
+			$ventaDivisas->moneda = $request->moneda;
+			$ventaDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			if($request->tipo == 'compra')
+				$ventaDivisas->tipo = "compra";
+			else
+				$ventaDivisas->tipo = "venta";
+
+			$ventaDivisas->save();
+		}
+
+		return redirect('ventasdivisas');
 	}
 
 	/**

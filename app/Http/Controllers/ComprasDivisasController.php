@@ -15,7 +15,7 @@ class ComprasDivisasController extends Controller {
 	 */
 	public function index()
 	{
-		$result = Currency::all();
+		$result = Currency::where('tipo', 'compra')->get();
 		return view('comprasdivisas.index', compact('result'));
 	}
 
@@ -26,11 +26,8 @@ class ComprasDivisasController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$monedas = array(['dolar' => 'dolar', 'euro' => 'euro']);
-			return view('comprasdivisas.create', compact('monedas'));
-
-		}
+		$monedas = array(['dolar' => 'dolar', 'euro' => 'euro']);
+		return view('comprasdivisas.create', compact('monedas'));
 	}
 
 	/**
@@ -54,8 +51,11 @@ class ComprasDivisasController extends Controller {
 			$compraDivisas->monto = $request->monto;
 			$compraDivisas->moneda = $request->moneda;
 			$compraDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$compraDivisas->tipo = "compra";
-			
+			if($request->tipo == 'compra')
+				$compraDivisas->tipo = "compra";
+			else
+				$compraDivisas->tipo = "venta";
+
 			$compraDivisas->save();
 		}
 

@@ -12,10 +12,10 @@
                     <div class="panel-heading text-center">Registrar compra divisas</div>
                     <div class="panel-body">
 
-                        {!! Form::open(['url'=>'comprasdivisas', 'class'=>'form-horizontal', 'role'=>'form'])!!}
+                        {!! Form::open(['url'=>'ventasdivisas', 'class'=>'form-horizontal', 'role'=>'form'])!!}
 
                         @include('comprasdivisas._form')
-                        {!!Form::hidden('tipo', 'compra')!!}
+                        {!!Form::hidden('tipo', 'venta')!!}
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">
                                 </br>
