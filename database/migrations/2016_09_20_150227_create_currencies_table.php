@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompraDivisasTable extends Migration {
+class CreateCurrenciesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,14 @@ class CreateCompraDivisasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('compra_divisas', function(Blueprint $table)
+		Schema::create('currencies', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('cantidad');
+			$table->string('monto');
+			$table->string('moneda');
+			$table->date('fecha');
+			$table->string('tipo');
 			$table->timestamps();
 		});
 	}
@@ -26,7 +31,7 @@ class CreateCompraDivisasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('compra_divisas');
+		Schema::drop('currencies');
 	}
 
 }

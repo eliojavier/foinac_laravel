@@ -164,19 +164,24 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#otras"><i class="fa fa-money"></i> Otras transacciones <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="otras" class="collapse">
+                    <a href="#" data-toggle="collapse" data-target="#interesbanco"><i class="fa fa-money"></i> Interés banco <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="interesbanco" class="collapse">
                         <li>
                             <a href="{{URL::to('interesesbanco/create')}}"><i class="fa fa-fw fa-edit"></i>Registro interés banco</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-edit"></i>Registro venta de divisas</a>
+                            <a href="{{URL::to('interesesbanco')}}"><i class="fa fa-fw fa-table"></i>Resumen</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#divisas"><i class="fa fa-money"></i> Compra/Venta divisas <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="divisas" class="collapse">
+                        <li>
+                            <a href="{{URL::to('comprasdivisas/create')}}"><i class="fa fa-fw fa-edit"></i>Registro compra divisas</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-edit"></i>Registro compra de divisas</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-table"></i>Resumen</a>
+                            <a href="{{URL::to('comprasdivisas')}}"><i class="fa fa-fw fa-table"></i>Resumen compras</a>
                         </li>
                     </ul>
                 </li>

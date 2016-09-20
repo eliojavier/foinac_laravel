@@ -16,8 +16,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('prestamos', 'PrestamosController');
     Route::resource('pagos', 'PagosController');
     Route::resource('interesesbanco', 'InteresBancoController');
-    Route::resource('compradivisas', 'CompraDivisasController');
-    Route::resource('ventadivisas', 'VentaDivisasController');
+    Route::resource('comprasdivisas', 'ComprasDivisasController');
+    Route::resource('ventasdivisas', 'VentasDivisasController');
     Route::resource('reportes', 'ReportesController');
 });
 
