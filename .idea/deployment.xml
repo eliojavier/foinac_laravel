@@ -7,6 +7,8 @@
           <mappings>
             <mapping deploy="/public_html/foinac.com.ve/site/resources/views/auth" local="$PROJECT_DIR$/resources/views/auth" web="/" />
             <mapping deploy="/public_html/foinac.com.ve/site/resources/views/prestamos" local="$PROJECT_DIR$/resources/views/prestamos" web="/" />
+            <mapping deploy="/public_html/foinac.com.ve/site/app" local="$PROJECT_DIR$/app" web="/" />
+            <mapping deploy="/public_html/foinac.com.ve/site/resources" local="$PROJECT_DIR$/resources" web="/" />
           </mappings>
         </serverdata>
       </paths>

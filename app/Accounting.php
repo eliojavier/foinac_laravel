@@ -1,9 +1,8 @@
 <?php namespace App;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
-class Asiento extends Model {
+class Accounting extends Model {
 
     public function getFechaAttribute($value)
     {

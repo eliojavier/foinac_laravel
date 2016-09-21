@@ -9,4 +9,5 @@ class BankInterest extends Model {
     {
         return DateTime::createFromFormat('Y-m-d',$value)->format('d/m/Y');
     }
+    
 }

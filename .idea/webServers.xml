@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="a1b769bc-baaf-4c90-8db5-a61cd5fc0eb7" name="FOINAC" url="http://ejsoluciones.com.ve">
-        <fileTransfer host="ejsoluciones.com.ve" port="21" username="ejsoluci">
+        <fileTransfer host="ejsoluciones.com.ve" port="21" password="dfe7df9adfdfdfcddf98dfc7df98dffedfd3df9c" username="ejsoluci">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
