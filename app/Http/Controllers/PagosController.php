@@ -82,6 +82,9 @@ class PagosController extends Controller {
             $payment->save();
 
 			//guarda el pago, tengo id del pago. Pago apunta a prestamo, prestamo a accionista
+
+			$result = Stockholder::has('loans')->where(Payment::where('loan_id', $request->prestamo))->get();
+			dd($result);
 			
 
             $result = DB::select('SELECT stockholders.name
