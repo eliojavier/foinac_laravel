@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
-    protected $dates = ['fecha'];
+    //protected $dates = ['fecha'];
 
     public function stockholder()
     {
-        return $this->belongsTo('App\Stockholder');
+        return $this->belongsTo(Stockholder::class);
     }
 
     public function getFechaAttribute($value)

@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Asiento;
+use App\Accounting;
 use App\Http\Requests;
-
-
 use App\Loan;
 use App\Payment;
 use App\Stockholder;
@@ -72,19 +70,16 @@ class PrestamosController extends Controller {
             $loan->monto = $request->monto;
             $loan->save();
 
-			$result = Stockholder::where('id', '=', $request->accionista )->lists('name');
+			$result = Stockholder::where('id', $request->accionista )->first(['name']);
+			$accionista = $result->name;
 
-			$accionista = 0;
-			foreach ($result as $r){
-				$accionista = $r;
-			}
-
-            $asiento = new Asiento();
+            $asiento = new Accounting();
             $asiento->debe = 'Cuentas por cobrar';
             $asiento->haber = 'Banco';
             $asiento->monto = $request->monto;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
             $asiento->descripcion = "Prestamo " . $accionista . " por monto de " . $request->monto;
+			$asiento->loan_id = $loan->id;
             $asiento->save();
         }
         return redirect('prestamos');

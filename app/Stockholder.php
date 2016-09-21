@@ -6,7 +6,11 @@ class Stockholder extends Model {
 
     public function stocks()
     {
-        return $this->hasMany('App\Stock');
+        return $this->hasMany(Stock::class);
     }
 
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

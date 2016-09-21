@@ -1,13 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Asiento;
+use App\Accounting;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Stock;
 use App\Stockholder;
-use App\User;
-use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +47,7 @@ class AccionesController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param Request $request
 	 * @return Response
 	 */
 	public function store(Request $request)
@@ -59,33 +56,35 @@ class AccionesController extends Controller {
 			'accionista' => 'required',
 			'fecha' => 'required',
 			'n_acciones' => 'required',
-			'monto' => 'required',
 		]);
+		
+		$VALOR_ACCION = 300;
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-            for ($i = 0; $i < $request->n_acciones; $i++) {
-                $stock = new Stock();
+		if(Auth::user()->id == 1 or Auth::user()->id == 2) 
+		{
+            for ($i = 0; $i < $request->n_acciones; $i++) 
+			{
+				//se guarda cada acción
+				$stock = new Stock();
+				$stock->stockholder_id = $request->accionista;
+				$stock->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+				$stock->monto = $VALOR_ACCION;
+				$stock->save();
 
-                $stock->stockholder_id = $request->accionista;
-                $stock->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-                $stock->monto = 300;
-                $stock->save();
-            }
+				//nombre del accionista
+				$result = Stockholder::where('id', $request->accionista)->first(['name']);
+				$accionista = $result->name;
 
-			$result = Stockholder::where('id', '=', $request->accionista )->lists('name');
-
-			$accionista = 0;
-			foreach ($result as $r){
-				$accionista = $r;
+				//se realiza el asiento correspondiente
+				$asiento = new Accounting();
+				$asiento->debe = 'Banco';
+				$asiento->haber = 'Capital';
+				$asiento->monto = $VALOR_ACCION;
+				$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+				$asiento->descripcion = "Compra de " . "acción " . $accionista;
+				$asiento->stock_id = $stock->id;
+				$asiento->save();
 			}
-
-            $asiento = new Asiento();
-            $asiento->debe = 'Banco';
-            $asiento->haber = 'Capital';
-            $asiento->monto = $request->monto;
-            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Compra de " . $request->n_acciones . " acciones " . $accionista;
-            $asiento->save();
         }
         return redirect('acciones');
 	}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Loan;
 use App\Payment;
+use App\Stockholder;
 use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -79,6 +80,9 @@ class PagosController extends Controller {
             $payment->montoInteres = $request->montoInteres;
             $payment->montoCapital = $request->montoCapital;
             $payment->save();
+
+			//guarda el pago, tengo id del pago. Pago apunta a prestamo, prestamo a accionista
+			
 
             $result = DB::select('SELECT stockholders.name
                                     FROM stockholders, loans, payments

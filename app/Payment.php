@@ -10,4 +10,8 @@ class Payment extends Model {
         return DateTime::createFromFormat('Y-m-d',$value)->format('d/m/Y');
     }
 
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class);
+    }
 }

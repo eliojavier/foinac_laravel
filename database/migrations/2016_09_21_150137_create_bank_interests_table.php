@@ -15,6 +15,8 @@ class CreateBankInterestsTable extends Migration {
 		Schema::create('bank_interests', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->float('monto');
+			$table->date('fecha');
 			$table->timestamps();
 		});
 	}
