@@ -54,7 +54,7 @@ class GananciasController extends Controller {
 			$ganancia->save();
 		}
 
-		return redirect('gastos');
+		return redirect('ganancias');
 	}
 
 	/**
