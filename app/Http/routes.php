@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('ventasdivisas', 'VentasDivisasController');
     Route::resource('asientos', 'AsientosController');
     Route::resource('reportes', 'ReportesController');
+    Route::resource('gastos', 'GastosController');
 });
 
 Route::get('/', 'SiteController@index');

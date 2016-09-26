@@ -175,6 +175,17 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#" data-toggle="collapse" data-target="#gastos"><i class="fa fa-money"></i> Gastos <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="gastos" class="collapse">
+                        <li>
+                            <a href="{{URL::to('gastos/create')}}"><i class="fa fa-fw fa-edit"></i>Registro gasto</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('gastos')}}"><i class="fa fa-fw fa-table"></i>Resumen</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#" data-toggle="collapse" data-target="#divisas"><i class="fa fa-money"></i> Compra/Venta divisas <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="divisas" class="collapse">
                         <li>
