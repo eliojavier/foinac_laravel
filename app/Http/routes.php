@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('asientos', 'AsientosController');
     Route::resource('reportes', 'ReportesController');
     Route::resource('gastos', 'GastosController');
+    Route::resource('ganancias', 'GananciasController');
 });
 
 Route::get('/', 'SiteController@index');

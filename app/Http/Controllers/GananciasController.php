@@ -1,16 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-use App\BankInterest;
-use App\Expense;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Loan;
-use App\Payment;
-use App\Stock;
+use App\Profit;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ReportesController extends Controller {
+class GananciasController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -19,29 +17,8 @@ class ReportesController extends Controller {
 	 */
 	public function index()
 	{
-		$total_acciones = Stock::sum('monto');
-		$total_interesesBanco = BankInterest::sum('monto');
-		$total_interesesPrestamos = Payment::sum('montoInteres');
-		$total_prestamos = Loan::sum('monto') - Payment::sum('montoCapital');
-		$total_gastos = Expense::sum('monto');
-
-		echo($total_acciones);
-		echo('-');
-		echo($total_interesesBanco);
-		echo('-');
-		echo($total_interesesPrestamos);
-		echo('-');
-		echo($total_prestamos);
-		echo('-');
-		echo($total_gastos);
-
-		$total_disponible = $total_acciones +
-							$total_interesesBanco +
-							$total_interesesPrestamos -
-							$total_gastos -
-							$total_prestamos;
-
-		echo($total_disponible);
+		$result = Profit::all();
+		return view('ganancias.index', compact('result'));
 	}
 
 	/**
@@ -51,7 +28,7 @@ class ReportesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('ganancias.create');
 	}
 
 	/**
@@ -59,9 +36,25 @@ class ReportesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$this->validate($request,[
+			'monto' => 'required',
+			'concepto' => 'required',
+			'fecha' => 'required'
+		]);
+
+		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
+			$ganancia = new Profit();
+
+			$ganancia->monto = $request->monto;
+			$ganancia->concepto = $request->concepto;
+			$ganancia->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+
+			$ganancia->save();
+		}
+
+		return redirect('gastos');
 	}
 
 	/**
