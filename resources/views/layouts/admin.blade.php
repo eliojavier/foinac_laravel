@@ -128,10 +128,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="{{ url('/') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <a href="{{ url('/') }}"> Resumen financiero</a>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#acciones"><i class="fa fa-line-chart"></i> Acciones <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#acciones"> Acciones <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="acciones" class="collapse">
                         <li>
                             <a href="{{URL::to('acciones/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar acciones</a>
@@ -142,7 +142,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#prestamos"><i class="fa fa-university"></i> Préstamos <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#prestamos"> Préstamos <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="prestamos" class="collapse">
                         <li>
                             <a href="{{URL::to('prestamos/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar préstamos</a>
@@ -153,7 +153,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a data-toggle="collapse" data-target="#pagos"><i class="fa fa-credit-card"></i> Pagos <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a data-toggle="collapse" data-target="#pagos"> Pagos <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="pagos" class="collapse">
                         <li>
                             <a href="{{URL::to('pagos/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar pagos</a>
@@ -164,7 +164,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#interesbanco"><i class="fa fa-money"></i> Interés banco <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#interesbanco"> Interés banco <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="interesbanco" class="collapse">
                         <li>
                             <a href="{{URL::to('interesesbanco/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar interés banco</a>
@@ -175,7 +175,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#gastos"><i class="fa fa-money"></i> Gastos <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#gastos"> Gastos <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="gastos" class="collapse">
                         <li>
                             <a href="{{URL::to('gastos/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar gasto</a>
@@ -186,7 +186,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#ganancias"><i class="fa fa-money"></i> Ganancias <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#ganancias"> Ganancias <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="ganancias" class="collapse">
                         <li>
                             <a href="{{URL::to('ganancias/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar ganancia</a>
@@ -197,14 +197,19 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#divisas"><i class="fa fa-money"></i> Compra/Venta divisas <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="divisas" class="collapse">
+                    <a href="#" data-toggle="collapse" data-target="#compras"> Compra divisas <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="compras" class="collapse">
                         <li>
                             <a href="{{URL::to('comprasdivisas/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar compra divisas</a>
                         </li>
                         <li>
                             <a href="{{URL::to('comprasdivisas')}}"><i class="fa fa-fw fa-table"></i>Resumen compras</a>
                         </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#ventas"> Venta divisas <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="ventas" class="collapse">
                         <li>
                             <a href="{{URL::to('ventasdivisas/create')}}"><i class="fa fa-fw fa-edit"></i>Registrar venta divisas</a>
                         </li>
@@ -214,7 +219,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#reportes"><i class="fa fa-bar-chart"></i> Gráficos y reportes <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="#" data-toggle="collapse" data-target="#reportes"> Gráficos y reportes <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="reportes" class="collapse">
                         <li>
                             <a href="#">Gráfico...</a>

@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 
-@section('title')
-    Registrar acción
-@endsection
-
 @section('content')
 <div class="container-fluid">
     <div class="row">

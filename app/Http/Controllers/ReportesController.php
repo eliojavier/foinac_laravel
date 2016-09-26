@@ -3,12 +3,10 @@
 use App\BankInterest;
 use App\Expense;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Loan;
 use App\Payment;
 use App\Stock;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportesController extends Controller {
 
@@ -25,15 +23,15 @@ class ReportesController extends Controller {
 		$total_prestamos = Loan::sum('monto') - Payment::sum('montoCapital');
 		$total_gastos = Expense::sum('monto');
 
-		echo($total_acciones);
-		echo('-');
-		echo($total_interesesBanco);
-		echo('-');
-		echo($total_interesesPrestamos);
-		echo('-');
-		echo($total_prestamos);
-		echo('-');
-		echo($total_gastos);
+//		echo($total_acciones);
+//		echo('-');
+//		echo($total_interesesBanco);
+//		echo('-');
+//		echo($total_interesesPrestamos);
+//		echo('-');
+//		echo($total_prestamos);
+//		echo('-');
+//		echo($total_gastos);
 
 		$total_disponible = $total_acciones +
 							$total_interesesBanco +
@@ -41,7 +39,14 @@ class ReportesController extends Controller {
 							$total_gastos -
 							$total_prestamos;
 
-		echo($total_disponible);
+//		echo($total_disponible);
+		
+		$acciones = DB::select('SELECT MONTHNAME(fecha) AS month, COUNT(id) AS value FROM stocks GROUP BY MONTH(fecha)');
+		$rows = array();
+		foreach ($acciones as $accion){
+			$rows[] = $accion;
+		}
+		return response()->json($rows);
 	}
 
 	/**
