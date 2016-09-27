@@ -1,25 +1,34 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div id="stocks" style="height: 250px;"></div>
     <script>
-        $.ajax({
-            type: "GET",
-            url: "reportes",
-            success: function (response) {
 
-            },
-            error: function (response) {
-
+        $.get("reportes/acciones", function (data) {
+            if (data) {
+                console.log("Data: " + data);
+            }
+            else {
+                console.log("vacio");
             }
         });
+
+//        $.ajax({
+//            url: "reportes/acciones",
+//            type: 'GET',
+//            success: function (data) {
+//                console.log(data.status);
+//            },
+//            error: function (response) {
+//                console.log(response);
+//            }
+//        });
+
 
         new Morris.Line({
             // ID of the element in which to draw the chart.
             element: 'stocks',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
+            // Chart data records -- each entry in this array corresponds to a point on the chart.
             data: [
                 {year: '2008', value: "20"},
                 {year: '2009', value: "10"},

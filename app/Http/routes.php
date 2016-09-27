@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('reportes', 'ReportesController');
     Route::resource('gastos', 'GastosController');
     Route::resource('ganancias', 'GananciasController');
+    Route::get('reportes/acciones', 'ReportesController@acciones');
 });
 
 Route::get('/', 'SiteController@index');

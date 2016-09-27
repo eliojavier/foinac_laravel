@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 col-md-offset-3">
+        <div class="col-lg-8 col-lg-offset-2 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">Registrar acción</div>
                 <div class="panel-body">
@@ -13,7 +13,7 @@
                     @include('acciones._form')
 
                     <div class="form-group">
-                        <div class="col-md-4 col-md-offset-4">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
                             </br>
                         {!! Form::submit('Registrar acción', ['class' => 'btn btn-primary form-control']) !!}
                         </div>
