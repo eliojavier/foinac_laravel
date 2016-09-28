@@ -219,6 +219,14 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#" data-toggle="collapse" data-target="#asientos"> Asientos contables <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="asientos" class="collapse">
+                        <li>
+                            <a href="{{URL::to('asientos')}}"><i class="fa fa-fw fa-table"></i>Asientos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#" data-toggle="collapse" data-target="#reportes"> Gráficos y reportes <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="reportes" class="collapse">
                         <li>

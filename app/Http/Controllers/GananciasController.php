@@ -54,8 +54,8 @@ class GananciasController extends Controller {
 
 			//asiento correspondiente
 			$asiento = new Accounting();
-			$asiento->debe = 'Cuentas por cobrar';
-			$asiento->haber = 'Banco';
+			$asiento->debe = 'Banco';
+			$asiento->haber = 'Ganancia';
 			$asiento->monto = $request->monto;
 			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
 			$asiento->descripcion = "Ganancia por monto de " . $request->monto;

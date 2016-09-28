@@ -55,7 +55,7 @@ class GastosController extends Controller {
 
 			//asiento correspondiente
 			$asiento = new Accounting();
-			$asiento->debe = 'Cuentas por cobrar';
+			$asiento->debe = 'Gastos bancarios';
 			$asiento->haber = 'Banco';
 			$asiento->monto = $request->monto;
 			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
