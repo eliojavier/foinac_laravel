@@ -64,7 +64,7 @@ class InteresBancoController extends Controller {
 			$asiento->save();
 		}
 
-		return redirect('interesesbanco');
+		return redirect('asientos');
 	}
 
 	/**

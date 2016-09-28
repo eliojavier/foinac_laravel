@@ -63,7 +63,7 @@ class GananciasController extends Controller {
 			$asiento->save();
 		}
 
-		return redirect('ganancias');
+		return redirect('asientos');
 	}
 
 	/**

@@ -70,7 +70,7 @@ class VentasDivisasController extends Controller {
 			$asiento->save();
 		}
 
-		return redirect('ventasdivisas');
+		return redirect('asientos');
 	}
 
 	/**

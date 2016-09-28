@@ -64,7 +64,7 @@ class GastosController extends Controller {
 			$asiento->save();
 		}
 
-		return redirect('gastos');
+		return redirect('asientos');
 	}
 
 	/**

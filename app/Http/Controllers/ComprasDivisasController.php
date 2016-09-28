@@ -68,7 +68,7 @@ class ComprasDivisasController extends Controller {
 			$asiento->save();
 		}
 
-		return redirect('comprasdivisas');
+		return redirect('asientos');
 	}
 
 	/**
