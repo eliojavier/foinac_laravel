@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Accounting;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -46,12 +47,20 @@ class GananciasController extends Controller {
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$ganancia = new Profit();
-
 			$ganancia->monto = $request->monto;
 			$ganancia->concepto = $request->concepto;
 			$ganancia->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-
 			$ganancia->save();
+
+			//asiento correspondiente
+			$asiento = new Accounting();
+			$asiento->debe = 'Cuentas por cobrar';
+			$asiento->haber = 'Banco';
+			$asiento->monto = $request->monto;
+			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$asiento->descripcion = "Ganancia por monto de " . $request->monto;
+			$asiento->profit_id = $ganancia->id;
+			$asiento->save();
 		}
 
 		return redirect('ganancias');

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Accounting;
 use App\Expense;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -47,12 +48,20 @@ class GastosController extends Controller {
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$gasto = new Expense();
-
 			$gasto->monto = $request->monto;
 			$gasto->concepto = $request->concepto;
 			$gasto->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-
 			$gasto->save();
+
+			//asiento correspondiente
+			$asiento = new Accounting();
+			$asiento->debe = 'Cuentas por cobrar';
+			$asiento->haber = 'Banco';
+			$asiento->monto = $request->monto;
+			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$asiento->descripcion = "Gastos de operación por monto de " . $request->monto;
+			$asiento->expense_id = $gasto->id;
+			$asiento->save();
 		}
 
 		return redirect('gastos');

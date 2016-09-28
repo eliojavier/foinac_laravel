@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Accounting;
 use App\Currency;
 use App\Http\Requests;
 use DateTime;
@@ -46,7 +47,6 @@ class ComprasDivisasController extends Controller {
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$compraDivisas = new Currency();
-			
 			$compraDivisas->cantidad = $request->cantidad;
 			$compraDivisas->monto = $request->monto;
 			$compraDivisas->moneda = $request->moneda;
@@ -55,8 +55,17 @@ class ComprasDivisasController extends Controller {
 				$compraDivisas->tipo = "compra";
 			else if($request->tipo == 'venta')
 				$compraDivisas->tipo = "venta";
-
 			$compraDivisas->save();
+
+			//asiento correspondiente
+			$asiento = new Accounting();
+			$asiento->debe = 'Moneda extranjera';
+			$asiento->haber = 'Banco';
+			$asiento->monto = $request->monto;
+			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$asiento->descripcion = "Compra de divisas por un monto de " . $request->monto . " en moneda " . $request->moneda;
+			$asiento->currency_id = $compraDivisas->id;
+			$asiento->save();
 		}
 
 		return redirect('comprasdivisas');

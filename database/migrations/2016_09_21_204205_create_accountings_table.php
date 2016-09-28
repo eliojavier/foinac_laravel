@@ -25,6 +25,8 @@ class CreateAccountingsTable extends Migration {
 			$table->integer('loan_id')->unsigned()->nullable();
 			$table->integer('currency_id')->unsigned()->nullable();
 			$table->integer('bank_interest_id')->unsigned()->nullable();
+			$table->integer('expense_id')->unsigned()->nullable();
+			$table->integer('profit_id')->unsigned()->nullable();
 			$table->timestamps();
 			
 			$table->foreign('stock_id')
@@ -46,6 +48,14 @@ class CreateAccountingsTable extends Migration {
 			$table->foreign('bank_interest_id')
 			      ->references('id')->on('bank_interests')
 			      ->onDelete('cascade');
+			
+			$table->foreign('expense_id')
+			      ->references('id')->on('expenses')
+			      ->onDelete('cascade');
+
+			$table->foreign('profit_id')
+				  ->references('id')->on('profits')
+				  ->onDelete('cascade');
 		});
 	}
 

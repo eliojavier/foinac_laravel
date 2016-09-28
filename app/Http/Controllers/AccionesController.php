@@ -75,7 +75,7 @@ class AccionesController extends Controller {
 				$result = Stockholder::where('id', $request->accionista)->first(['name']);
 				$accionista = $result->name;
 
-				//se realiza el asiento correspondiente
+				//asiento correspondiente
 				$asiento = new Accounting();
 				$asiento->debe = 'Banco';
 				$asiento->haber = 'Capital';

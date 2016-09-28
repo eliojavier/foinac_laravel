@@ -73,6 +73,7 @@ class PrestamosController extends Controller {
 			$result = Stockholder::where('id', $request->accionista )->first(['name']);
 			$accionista = $result->name;
 
+			//asiento correspondiente
             $asiento = new Accounting();
             $asiento->debe = 'Cuentas por cobrar';
             $asiento->haber = 'Banco';

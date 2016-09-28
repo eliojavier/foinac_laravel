@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Accounting;
 use App\BankInterest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -48,10 +49,19 @@ class InteresBancoController extends Controller {
 
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$interesBanco = new BankInterest();
-
 			$interesBanco->monto = $request->monto;
 			$interesBanco->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
 			$interesBanco->save();
+
+			//asiento correspondiente
+			$asiento = new Accounting();
+			$asiento->debe = 'Cuentas por cobrar';
+			$asiento->haber = 'Banco';
+			$asiento->monto = $request->monto;
+			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$asiento->descripcion = "Interés bancario por monto de  " . $request->monto;
+			$asiento->bank_interest_id = $interesBanco->id;
+			$asiento->save();
 		}
 
 		return redirect('interesesbanco');
