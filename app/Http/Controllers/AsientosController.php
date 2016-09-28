@@ -15,7 +15,7 @@ class AsientosController extends Controller {
 	 */
 	public function index()
 	{
-		$result = Accounting::all();
+		$result = Accounting::orderBy('created_at', 'desc')->get();
 		
 		return view('asientos.index', compact('result'));
 	}

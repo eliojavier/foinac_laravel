@@ -86,7 +86,7 @@ class AccionesController extends Controller {
 				$asiento->save();
 			}
         }
-        return redirect('acciones');
+        return redirect('asientos');
 	}
 
 	/**

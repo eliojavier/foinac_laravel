@@ -14,6 +14,7 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
+                                        <th> #</th>
                                         <th> Debe</th>
                                         <th> Haber</th>
                                         <th> Monto</th>
@@ -24,6 +25,7 @@
                                     <tbody>
                                     @foreach($result as $r)
                                         <tr>
+                                            <td>{{$r->id}}</td>
                                             <td>{{$r->debe}}</td>
                                             <td>{{$r->haber}}</td>
                                             <td>{{$r->monto}}</td>

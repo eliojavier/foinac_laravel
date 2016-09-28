@@ -49,7 +49,7 @@ class PagosController extends Controller {
 			$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
 										FROM stockholders sh, loans l
 										WHERE sh.id = l.stockholder_id');
-			
+
 			$prestamos = array();
 			
 			foreach ($result as $r) {
@@ -122,7 +122,7 @@ class PagosController extends Controller {
 			$asiento->payment_id = $payment->id;
             $asiento->save();
         }
-        return redirect('pagos');
+        return redirect('asientos');
 	}
 
 	/**

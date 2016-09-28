@@ -83,7 +83,7 @@ class PrestamosController extends Controller {
 			$asiento->loan_id = $loan->id;
             $asiento->save();
         }
-        return redirect('prestamos');
+        return redirect('asientos');
 	}
 
 	/**
