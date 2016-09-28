@@ -59,7 +59,7 @@ class GastosController extends Controller {
 			$asiento->haber = 'Banco';
 			$asiento->monto = $request->monto;
 			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Gastos de operación por monto de " . $request->monto;
+			$asiento->descripcion = "Gastos de operación por monto de bolívares " . $request->monto;
 			$asiento->expense_id = $gasto->id;
 			$asiento->save();
 		}

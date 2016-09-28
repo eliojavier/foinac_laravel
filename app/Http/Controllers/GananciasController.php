@@ -58,7 +58,7 @@ class GananciasController extends Controller {
 			$asiento->haber = 'Ganancia';
 			$asiento->monto = $request->monto;
 			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Ganancia por monto de " . $request->monto;
+			$asiento->descripcion = "Ganancia por monto de bolívares " . $request->monto;
 			$asiento->profit_id = $ganancia->id;
 			$asiento->save();
 		}

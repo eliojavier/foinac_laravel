@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Accounting;
 use App\Asiento;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -81,41 +82,44 @@ class PagosController extends Controller {
             $payment->montoCapital = $request->montoCapital;
             $payment->save();
 
-			//guarda el pago, tengo id del pago. Pago apunta a prestamo, prestamo a accionista
+			$loan = Loan::findOrFail($request->prestamo);
+			$stockholder = $loan->stockholder->name;
 
-			$result = Stockholder::has('loans')->where(Payment::where('loan_id', $request->prestamo))->get();
-			dd($result);
-			
+			//dd($loan->stockholder->name);
 
-            $result = DB::select('SELECT stockholders.name
-                                    FROM stockholders, loans, payments
-                                    WHERE payments.loan_id = ' . $request->prestamo .
-                                        ' AND payments.loan_id = loans.id
-                                          AND loans.stockholder_id = stockholders.id
-                                    LIMIT 1');
+//            $result = DB::select('SELECT stockholders.name
+//                                    FROM stockholders, loans, payments
+//                                    WHERE payments.loan_id = ' . $request->prestamo .
+//                                        ' AND payments.loan_id = loans.id
+//                                          AND loans.stockholder_id = stockholders.id
+//                                    LIMIT 1');
+//
+//            $accionista = 0;
+//
+//            foreach ($result as $r){
+//                foreach ($r as $k){
+//                    $accionista = $k;
+//                }
+//            }
 
-            $accionista = 0;
-
-            foreach ($result as $r){
-                foreach ($r as $k){
-                    $accionista = $k;
-                }
-            }
-
-            $asiento = new Asiento();
+			//asiento correspondiente al pago
+            $asiento = new Accounting();
             $asiento->debe = 'Banco';
             $asiento->haber = 'Cuentas por cobrar';
             $asiento->monto = $request->montoCapital;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Amortización prestamo " .$accionista;
+            $asiento->descripcion = "Amortización préstamo " .$stockholder;
+			$asiento->payment_id = $payment->id;
             $asiento->save();
 
-            $asiento = new Asiento();
+			//asiento correspondiente a los intereses
+            $asiento = new Accounting();
             $asiento->debe = 'Banco';
-            $asiento->haber = 'Intereses por prestamo';
+            $asiento->haber = 'Intereses por préstamo';
             $asiento->monto = $request->montoInteres;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Pago intereses préstamo " .$accionista;
+            $asiento->descripcion = "Pago intereses préstamo " .$stockholder;
+			$asiento->payment_id = $payment->id;
             $asiento->save();
         }
         return redirect('pagos');

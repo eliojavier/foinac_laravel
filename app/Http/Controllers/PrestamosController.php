@@ -79,7 +79,7 @@ class PrestamosController extends Controller {
             $asiento->haber = 'Banco';
             $asiento->monto = $request->monto;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Prestamo " . $accionista . " por monto de " . $request->monto;
+            $asiento->descripcion = "Prestamo " . $accionista . " por monto de bolívares " . $request->monto;
 			$asiento->loan_id = $loan->id;
             $asiento->save();
         }

@@ -59,7 +59,7 @@ class InteresBancoController extends Controller {
 			$asiento->haber = 'Interés bancario';
 			$asiento->monto = $request->monto;
 			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Interés bancario por monto de  " . $request->monto;
+			$asiento->descripcion = "Interés bancario por monto de bolívares " . $request->monto;
 			$asiento->bank_interest_id = $interesBanco->id;
 			$asiento->save();
 		}

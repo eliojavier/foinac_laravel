@@ -15,9 +15,9 @@ class AsientosController extends Controller {
 	 */
 	public function index()
 	{
-		$asientos = Accounting::all();
+		$result = Accounting::all();
 		
-		return view('asientos.index', compact('asientos'));
+		return view('asientos.index', compact('result'));
 	}
 
 	/**
