@@ -16,8 +16,9 @@ class CreateLoansTable extends Migration {
 		{
 			$table->increments('id');
             $table->unsignedInteger('stockholder_id');
-            $table->date('fecha');
             $table->float('monto');
+			$table->date('fecha');
+			$table->string('concepto')->nullable();
 			$table->boolean('fuePagado')->default(0);
 			$table->timestamps();
 

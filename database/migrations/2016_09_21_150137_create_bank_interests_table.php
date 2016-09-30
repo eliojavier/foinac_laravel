@@ -17,6 +17,7 @@ class CreateBankInterestsTable extends Migration {
 			$table->increments('id');
 			$table->float('monto');
 			$table->date('fecha');
+			$table->string('concepto')->nullable();
 			$table->timestamps();
 		});
 	}

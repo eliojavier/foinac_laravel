@@ -1,48 +1,74 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div id="stocks" style="height: 250px;"></div>
-    <script>
+    <div class="form-group">
+        {!!Form::label('','Total capital acciones: ')!!}
+        {{$TOTAL_ACCIONES}}
+    </div>
 
-        $.get("reportes/acciones", function (data) {
-            if (data) {
-                console.log("Data: " + data);
-            }
-            else {
-                console.log("vacio");
-            }
-        });
+    <div class="form-group">
+        {!!Form::label('','Total intereses préstamos: ')!!}
+        {{$TOTAL_INTERESES_PRESTAMOS}}
+    </div>
 
-//        $.ajax({
-//            url: "reportes/acciones",
-//            type: 'GET',
-//            success: function (data) {
-//                console.log(data.status);
-//            },
-//            error: function (response) {
-//                console.log(response);
-//            }
-//        });
+    <div class="form-group">
+        {!!Form::label('','Total intereses banco: ')!!}
+        {{$TOTAL_INTERESES_BANCO}}
+    </div>
 
+    <div class="form-group">
+        {!!Form::label('','Total ganancias: ')!!}
+        {{$TOTAL_GANANCIAS}}
+    </div>
 
-        new Morris.Line({
-            // ID of the element in which to draw the chart.
-            element: 'stocks',
-            // Chart data records -- each entry in this array corresponds to a point on the chart.
-            data: [
-                {year: '2008', value: "20"},
-                {year: '2009', value: "10"},
-                {year: '2010', value: "5"},
-                {year: '2011', value: "5"},
-                {year: '2012', value: "20"},
-            ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the chart.
-            labels: ['Value']
-        });
-    </script>
+    <div class="form-group">
+        {!!Form::label('','Total en préstamos: ')!!}
+        {!!Form::label('',$TOTAL_PRESTAMOS)!!}
+        {{$TOTAL_PRESTAMOS}}
+    </div>
+
+    <div class="form-group">
+        {!!Form::label('','Total gastos: ')!!}
+        {{$TOTAL_GASTOS}}
+    </div>
+
+    <div class="form-group">
+        {!!Form::label('','Total disponible: ')!!}
+        {{$TOTAL_DISPONIBLE}}
+    </div>
+
+    <button type="button" class="btn" id="bAcciones">Acciones</button>
+    <div ng-app="">
+        <p>My first expression: {{ 5 + 5 }}</p>
+    </div>
 @endsection
 
+@section('scripts')
+    <script>
+        $( document ).ready(function() {
+            $('#bAcciones').click(function(){
+                $.ajax({
+                    url: '/reportes/acciones',
+                    type: 'GET',
+                    success:function(result)
+                    {
+                        console.log('Successfully called:' + result);
+                    },
+                    error:function(exception){alert('Exeption: ' + exception);}
+                });
+//                $.get('reportes/acciones', function (data) {
+//                    console.log(data);
+//                })
+            });
+        });
+    </script>
+
+    {{--<script>--}}
+        {{--var app = angular.module('myApp', []);--}}
+        {{--app.controller('customersCtrl', function($scope, $http) {--}}
+            {{--$http.get("reportes/acciones").then(function(response) {--}}
+                {{--$scope.myData = response.data.records;--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
+@endsection

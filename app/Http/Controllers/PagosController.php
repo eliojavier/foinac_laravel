@@ -77,9 +77,10 @@ class PagosController extends Controller {
         if(Auth::user()->id == 1 or Auth::user()->id == 2) {
             $payment = new Payment();
             $payment->loan_id = $request->prestamo;
-            $payment->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
             $payment->montoInteres = $request->montoInteres;
             $payment->montoCapital = $request->montoCapital;
+			$payment->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$payment->concepto = $request->concepto;
             $payment->save();
 
 			$loan = Loan::findOrFail($request->prestamo);

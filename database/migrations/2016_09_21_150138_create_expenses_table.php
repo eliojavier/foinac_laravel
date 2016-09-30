@@ -16,8 +16,8 @@ class CreateExpensesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->float('monto');
-			$table->string('concepto');
 			$table->date('fecha');
+			$table->string('concepto')->nullable();
 			$table->timestamps();
 		});
 	}

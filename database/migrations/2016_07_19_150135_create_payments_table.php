@@ -16,9 +16,10 @@ class CreatePaymentsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->unsignedInteger('loan_id');
-			$table->date('fecha');
 			$table->float('montoCapital');
 			$table->float('montoInteres');
+			$table->date('fecha');
+			$table->string('concepto')->nullable();
 			$table->timestamps();
 
 			$table->foreign('loan_id')

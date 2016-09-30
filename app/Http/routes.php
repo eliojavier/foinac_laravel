@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('acciones', 'AccionesController');
     Route::resource('prestamos', 'PrestamosController');
@@ -22,8 +24,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('reportes', 'ReportesController');
     Route::resource('gastos', 'GastosController');
     Route::resource('ganancias', 'GananciasController');
-    Route::get('reportes/acciones', 'ReportesController@acciones');
+
     Route::get('asientos/excel', 'ExcelController@index');
+
+
+});
+Route::get('/reportes/acciones', function(){
+    if(Request::ajax()){
+        echo "x";
+    }
+    echo "y";
 });
 
 Route::get('/', 'SiteController@index');

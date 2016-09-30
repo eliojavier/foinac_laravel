@@ -51,6 +51,7 @@ class InteresBancoController extends Controller {
 			$interesBanco = new BankInterest();
 			$interesBanco->monto = $request->monto;
 			$interesBanco->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$interesBanco->concepto = $request->concepto;
 			$interesBanco->save();
 
 			//asiento correspondiente

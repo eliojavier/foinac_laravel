@@ -49,8 +49,8 @@ class GastosController extends Controller {
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$gasto = new Expense();
 			$gasto->monto = $request->monto;
-			$gasto->concepto = $request->concepto;
 			$gasto->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$gasto->concepto = $request->concepto;
 			$gasto->save();
 
 			//asiento correspondiente

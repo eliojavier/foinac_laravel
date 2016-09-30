@@ -51,6 +51,7 @@ class ComprasDivisasController extends Controller {
 			$compraDivisas->monto = $request->monto;
 			$compraDivisas->moneda = $request->moneda;
 			$compraDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$compraDivisas->concepto = $request->concepto;
 			if($request->tipo == 'compra')
 				$compraDivisas->tipo = "compra";
 			else if($request->tipo == 'venta')

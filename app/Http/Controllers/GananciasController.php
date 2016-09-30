@@ -48,8 +48,8 @@ class GananciasController extends Controller {
 		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
 			$ganancia = new Profit();
 			$ganancia->monto = $request->monto;
-			$ganancia->concepto = $request->concepto;
 			$ganancia->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$ganancia->concepto = $request->concepto;
 			$ganancia->save();
 
 			//asiento correspondiente

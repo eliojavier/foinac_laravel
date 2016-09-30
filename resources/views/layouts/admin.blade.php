@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Elio Acosta">
+
+
 
     <title> @yield('title')</title>
 
@@ -25,35 +27,6 @@
 
     <!-- Custom Fonts -->
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="{{asset('/js/jquery-1.12.4.js')}}" ></script>
-    <script src="{{asset('/js/jquery-ui.js')}}" ></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('/js/bootstrap.min.js') }}"> </script>
-
-    <!-- DatePicker -->
-    <script src="{{asset('/js/datepicker.js')}}" ></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{{ asset('/js/plugins/morris/raphael.min.js') }}"> </script>
-    <script src="{{ asset('/js/plugins/morris/morris.min.js') }}"> </script>
-    <script src="{{ asset('/js/plugins/morris/morris-data.js') }}"> </script>
-
-    <!-- DataTables -->
-    <script src="{{asset('/js/dataTables.min.js')}}" ></script>
-    <script src="{{ asset('/js/MyDataTables.js') }}"> </script>
-
-    <!-- Scripts -->
-    <script src="{{ asset('/js/vue.js') }}"> </script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -271,8 +244,44 @@
 </div>
 <!-- /#wrapper -->
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="{{ asset('/js/bootstrap.min.js') }}"> </script>
+<script src="{{asset('/js/datepicker.js')}}" ></script>
 @yield('scripts')
 
+{{--<!-- Morris Charts JavaScript -->--}}
+{{--<script src="{{ asset('/js/plugins/morris/raphael.min.js') }}"> </script>--}}
+{{--<script src="{{ asset('/js/plugins/morris/morris.min.js') }}"> </script>--}}
+{{--<script src="{{ asset('/js/plugins/morris/morris-data.js') }}"> </script>--}}
+
+{{--<!-- jQuery -->--}}
+{{--<script src="{{asset('/js/jquery-1.12.4.js')}}" ></script>--}}
+{{--<script src="{{asset('/js/jquery-ui.js')}}" ></script>--}}
+
+{{--<!-- Bootstrap Core JavaScript -->--}}
+{{--<script src="{{ asset('/js/bootstrap.min.js') }}"> </script>--}}
+
+{{--<!-- DatePicker -->--}}
+
+
+
+
+{{--<!-- DataTables -->--}}
+{{--<script src="{{asset('/js/dataTables.min.js')}}" ></script>--}}
+{{--<script src="{{ asset('/js/MyDataTables.js') }}"> </script>--}}
+
+{{--<!-- Scripts -->--}}
+{{--<script src="{{ asset('/js/vue.js') }}"> </script>--}}
+
+{{--<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->--}}
+{{--<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->--}}
+{{--<!--[if lt IE 9]>--}}
+{{--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>--}}
+{{--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>--}}
+{{--<![endif]-->--}}
+{{--@yield('scripts')--}}
 </body>
 
 </html>

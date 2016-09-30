@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
                             </br>
-                        {!! Form::submit('Registrar pago', ['class' => 'btn btn-primary form-control']) !!}
+                        {!! Form::submit('Registrar', ['class' => 'btn btn-primary form-control']) !!}
                         </div>
                     </div>
                     {!! Form::close() !!}

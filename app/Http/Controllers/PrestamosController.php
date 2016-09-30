@@ -66,8 +66,9 @@ class PrestamosController extends Controller {
         if(Auth::user()->id == 1 or Auth::user()->id == 2) {
             $loan = new Loan();
             $loan->stockholder_id = $request->accionista;
-            $loan->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
             $loan->monto = $request->monto;
+			$loan->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+			$loan->concepto = $request->concepto;
             $loan->save();
 
 			$result = Stockholder::where('id', $request->accionista )->first(['name']);
@@ -79,7 +80,7 @@ class PrestamosController extends Controller {
             $asiento->haber = 'Banco';
             $asiento->monto = $request->monto;
             $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Prestamo " . $accionista . " por monto de bolívares " . $request->monto;
+            $asiento->descripcion = "Préstamo " . $accionista . " por monto de bolívares " . $request->monto;
 			$asiento->loan_id = $loan->id;
             $asiento->save();
         }

@@ -19,6 +19,7 @@ class CreateCurrenciesTable extends Migration {
 			$table->string('monto');
 			$table->string('moneda');
 			$table->date('fecha');
+			$table->string('concepto')->nullable();
 			$table->string('tipo');
 			$table->timestamps();
 		});

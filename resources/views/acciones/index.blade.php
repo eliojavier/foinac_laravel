@@ -16,8 +16,6 @@
                                     <th> Accionista</th>
                                     <th> Núm. de acciones</th>
                                     <th> Monto inversión</th>
-                                    <th> Editar</th>
-                                    <th> Eliminar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -26,8 +24,6 @@
                                         <td>{{$r->accionista}}</td>
                                         <td>{{$r->numacciones}}</td>
                                         <td>{{$r->montoinversion}}</td>
-                                        <td>Editar</td>
-                                        <td><a href="" class="btn-delete">Eliminar</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

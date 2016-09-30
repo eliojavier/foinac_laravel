@@ -27,9 +27,9 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('descripcion', 'Descripción', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('concepto', 'Concepto (Opcional)', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-3">
-        {!! Form::text('descripcion', null, ['class' => 'form-control col-md-6']) !!}
+        {!! Form::text('concepto', null, ['class' => 'form-control col-md-6']) !!}
     </div>
 </div>
 
