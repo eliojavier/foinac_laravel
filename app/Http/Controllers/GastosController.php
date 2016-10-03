@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class GastosController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -46,23 +51,21 @@ class GastosController extends Controller {
 			'fecha' => 'required'
 		]);
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$gasto = new Expense();
-			$gasto->monto = $request->monto;
-			$gasto->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$gasto->concepto = $request->concepto;
-			$gasto->save();
+		$gasto = new Expense();
+		$gasto->monto = $request->monto;
+		$gasto->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$gasto->concepto = $request->concepto;
+		$gasto->save();
 
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Gastos bancarios';
-			$asiento->haber = 'Banco';
-			$asiento->monto = $request->monto;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Gastos de operación por monto de bolívares " . $request->monto;
-			$asiento->expense_id = $gasto->id;
-			$asiento->save();
-		}
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Gastos bancarios';
+		$asiento->haber = 'Banco';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Gastos de operación por monto de bolívares " . $request->monto;
+		$asiento->expense_id = $gasto->id;
+		$asiento->save();
 
 		return redirect('asientos');
 	}

@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class InteresBancoController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -29,10 +34,7 @@ class InteresBancoController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			return view ('interesbanco/create');
-		}
-		return redirect('home');
+		return view('interesbanco/create');
 	}
 
 	/**
@@ -47,23 +49,21 @@ class InteresBancoController extends Controller {
 			'fecha' => 'required',
 		]);
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$interesBanco = new BankInterest();
-			$interesBanco->monto = $request->monto;
-			$interesBanco->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$interesBanco->concepto = $request->concepto;
-			$interesBanco->save();
+		$interesBanco = new BankInterest();
+		$interesBanco->monto = $request->monto;
+		$interesBanco->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$interesBanco->concepto = $request->concepto;
+		$interesBanco->save();
 
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Banco';
-			$asiento->haber = 'Interés bancario';
-			$asiento->monto = $request->monto;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Interés bancario por monto de bolívares " . $request->monto;
-			$asiento->bank_interest_id = $interesBanco->id;
-			$asiento->save();
-		}
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Interés bancario';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Interés bancario por monto de bolívares " . $request->monto;
+		$asiento->bank_interest_id = $interesBanco->id;
+		$asiento->save();
 
 		return redirect('asientos');
 	}

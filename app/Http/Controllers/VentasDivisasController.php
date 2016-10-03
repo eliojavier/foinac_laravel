@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class VentasDivisasController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -47,28 +52,27 @@ class VentasDivisasController extends Controller {
 			'fecha' => 'required'
 		]);
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$ventaDivisas = new Currency();
-			$ventaDivisas->cantidad = $request->cantidad;
-			$ventaDivisas->monto = $request->monto;
-			$ventaDivisas->moneda = $request->moneda;
-			$ventaDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			if($request->tipo == 'compra')
-				$ventaDivisas->tipo = "compra";
-			else
-				$ventaDivisas->tipo = "venta";
-			$ventaDivisas->save();
+		$ventaDivisas = new Currency();
+		$ventaDivisas->cantidad = $request->cantidad;
+		$ventaDivisas->monto = $request->monto;
+		$ventaDivisas->moneda = $request->moneda;
+		$ventaDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		if ($request->tipo == 'compra')
+			$ventaDivisas->tipo = "compra";
+		else
+			$ventaDivisas->tipo = "venta";
+		
+		$ventaDivisas->save();
 
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Banco';
-			$asiento->haber = 'Moneda extranjera';
-			$asiento->monto = $request->monto;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Venta de divisas por un monto de " . $request->monto . " en moneda " . $request->moneda;
-			$asiento->currency_id = $ventaDivisas->id;
-			$asiento->save();
-		}
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Moneda extranjera';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Venta de divisas por un monto de " . $request->monto . " en moneda " . $request->moneda;
+		$asiento->currency_id = $ventaDivisas->id;
+		$asiento->save();
 
 		return redirect('asientos');
 	}

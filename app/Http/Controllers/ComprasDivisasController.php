@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ComprasDivisasController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -45,30 +50,28 @@ class ComprasDivisasController extends Controller {
 			'fecha' => 'required'
 		]);
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$compraDivisas = new Currency();
-			$compraDivisas->cantidad = $request->cantidad;
-			$compraDivisas->monto = $request->monto;
-			$compraDivisas->moneda = $request->moneda;
-			$compraDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$compraDivisas->concepto = $request->concepto;
-			if($request->tipo == 'compra')
-				$compraDivisas->tipo = "compra";
-			else if($request->tipo == 'venta')
-				$compraDivisas->tipo = "venta";
-			$compraDivisas->save();
+		$compraDivisas = new Currency();
+		$compraDivisas->cantidad = $request->cantidad;
+		$compraDivisas->monto = $request->monto;
+		$compraDivisas->moneda = $request->moneda;
+		$compraDivisas->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$compraDivisas->concepto = $request->concepto;
+		if ($request->tipo == 'compra')
+			$compraDivisas->tipo = "compra";
+		else if ($request->tipo == 'venta')
+			$compraDivisas->tipo = "venta";
+		$compraDivisas->save();
 
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Moneda extranjera';
-			$asiento->haber = 'Banco';
-			$asiento->monto = $request->monto;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Compra de divisas por un monto de " . $request->monto . " en moneda " . $request->moneda;
-			$asiento->currency_id = $compraDivisas->id;
-			$asiento->save();
-		}
-
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Moneda extranjera';
+		$asiento->haber = 'Banco';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Compra de divisas por un monto de " . $request->monto . " en moneda " . $request->moneda;
+		$asiento->currency_id = $compraDivisas->id;
+		$asiento->save();
+		
 		return redirect('asientos');
 	}
 

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class PrestamosController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -42,12 +47,8 @@ class PrestamosController extends Controller {
 	 */
 	public function create()
 	{
-        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-            $stockholders = Stockholder::lists('name', 'id');
-
-            return view('prestamos/create', compact('stockholders'));
-        }
-        return redirect('home');
+		$stockholders = Stockholder::lists('name', 'id');
+		return view('prestamos/create', compact('stockholders'));
 	}
 
 	/**
@@ -62,28 +63,27 @@ class PrestamosController extends Controller {
 			'fecha' => 'required',
 			'monto' => 'required'
 		]);
+		
+		$loan = new Loan();
+		$loan->stockholder_id = $request->accionista;
+		$loan->monto = $request->monto;
+		$loan->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$loan->concepto = $request->concepto;
+		$loan->save();
 
-        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-            $loan = new Loan();
-            $loan->stockholder_id = $request->accionista;
-            $loan->monto = $request->monto;
-			$loan->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$loan->concepto = $request->concepto;
-            $loan->save();
+		$result = Stockholder::where('id', $request->accionista)->first(['name']);
+		$accionista = $result->name;
 
-			$result = Stockholder::where('id', $request->accionista )->first(['name']);
-			$accionista = $result->name;
-
-			//asiento correspondiente
-            $asiento = new Accounting();
-            $asiento->debe = 'Cuentas por cobrar';
-            $asiento->haber = 'Banco';
-            $asiento->monto = $request->monto;
-            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Préstamo " . $accionista . " por monto de bolívares " . $request->monto;
-			$asiento->loan_id = $loan->id;
-            $asiento->save();
-        }
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Cuentas por cobrar';
+		$asiento->haber = 'Banco';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Préstamo " . $accionista . " por monto de bolívares " . $request->monto;
+		$asiento->loan_id = $loan->id;
+		$asiento->save();
+        
         return redirect('asientos');
 	}
 

@@ -17,6 +17,11 @@ use PhpParser\Node\Expr\Array_;
 
 class PagosController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -45,19 +50,16 @@ class PagosController extends Controller {
 	 */
 	public function create()
 	{
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
+		$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
 										FROM stockholders sh, loans l
 										WHERE sh.id = l.stockholder_id');
 
-			$prestamos = array();
-			
-			foreach ($result as $r) {
-				$prestamos = array_add($prestamos, $r->id, $r->prestamo);
-			}
-			return view('pagos/create', compact('prestamos'));
+		$prestamos = array();
+
+		foreach ($result as $r) {
+			$prestamos = array_add($prestamos, $r->id, $r->prestamo);
 		}
-		return redirect('home');
+		return view('pagos/create', compact('prestamos'));
 	}
 
 	/**
@@ -74,55 +76,37 @@ class PagosController extends Controller {
             'montoCapital' => 'required'
 		]);
 
-        if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-            $payment = new Payment();
-            $payment->loan_id = $request->prestamo;
-            $payment->montoInteres = $request->montoInteres;
-            $payment->montoCapital = $request->montoCapital;
-			$payment->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$payment->concepto = $request->concepto;
-            $payment->save();
+		$payment = new Payment();
+		$payment->loan_id = $request->prestamo;
+		$payment->montoInteres = $request->montoInteres;
+		$payment->montoCapital = $request->montoCapital;
+		$payment->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$payment->concepto = $request->concepto;
+		$payment->save();
 
-			$loan = Loan::findOrFail($request->prestamo);
-			$stockholder = $loan->stockholder->name;
+		$loan = Loan::findOrFail($request->prestamo);
+		$stockholder = $loan->stockholder->name;
+		
+		//asiento correspondiente al pago
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Cuentas por cobrar';
+		$asiento->monto = $request->montoCapital;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Amortización préstamo " . $stockholder;
+		$asiento->payment_id = $payment->id;
+		$asiento->save();
 
-			//dd($loan->stockholder->name);
-
-//            $result = DB::select('SELECT stockholders.name
-//                                    FROM stockholders, loans, payments
-//                                    WHERE payments.loan_id = ' . $request->prestamo .
-//                                        ' AND payments.loan_id = loans.id
-//                                          AND loans.stockholder_id = stockholders.id
-//                                    LIMIT 1');
-//
-//            $accionista = 0;
-//
-//            foreach ($result as $r){
-//                foreach ($r as $k){
-//                    $accionista = $k;
-//                }
-//            }
-
-			//asiento correspondiente al pago
-            $asiento = new Accounting();
-            $asiento->debe = 'Banco';
-            $asiento->haber = 'Cuentas por cobrar';
-            $asiento->monto = $request->montoCapital;
-            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Amortización préstamo " .$stockholder;
-			$asiento->payment_id = $payment->id;
-            $asiento->save();
-
-			//asiento correspondiente a los intereses
-            $asiento = new Accounting();
-            $asiento->debe = 'Banco';
-            $asiento->haber = 'Intereses por préstamo';
-            $asiento->monto = $request->montoInteres;
-            $asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-            $asiento->descripcion = "Pago intereses préstamo " .$stockholder;
-			$asiento->payment_id = $payment->id;
-            $asiento->save();
-        }
+		//asiento correspondiente a los intereses
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Intereses por préstamo';
+		$asiento->monto = $request->montoInteres;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Pago intereses préstamo " . $stockholder;
+		$asiento->payment_id = $payment->id;
+		$asiento->save();
+        
         return redirect('asientos');
 	}
 

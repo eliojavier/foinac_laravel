@@ -26,9 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('ganancias', 'GananciasController');
 
     Route::get('asientos/excel', 'ExcelController@index');
-
-
 });
+
 Route::get('/reportes/acciones', function(){
     if(Request::ajax()){
         echo "x";

@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class GananciasController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('admin', ['only' => ['create', 'store']]);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -44,25 +49,23 @@ class GananciasController extends Controller {
 			'concepto' => 'required',
 			'fecha' => 'required'
 		]);
+		
+		$ganancia = new Profit();
+		$ganancia->monto = $request->monto;
+		$ganancia->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$ganancia->concepto = $request->concepto;
+		$ganancia->save();
 
-		if(Auth::user()->id == 1 or Auth::user()->id == 2) {
-			$ganancia = new Profit();
-			$ganancia->monto = $request->monto;
-			$ganancia->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$ganancia->concepto = $request->concepto;
-			$ganancia->save();
-
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Banco';
-			$asiento->haber = 'Ganancia';
-			$asiento->monto = $request->monto;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Ganancia por monto de bolívares " . $request->monto;
-			$asiento->profit_id = $ganancia->id;
-			$asiento->save();
-		}
-
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Ganancia';
+		$asiento->monto = $request->monto;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Ganancia por monto de bolívares " . $request->monto;
+		$asiento->profit_id = $ganancia->id;
+		$asiento->save();
+		
 		return redirect('asientos');
 	}
 
