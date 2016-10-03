@@ -8,6 +8,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-xs-12">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading text-center">Registrar préstamo</div>
                 <div class="panel-body">

@@ -52,7 +52,7 @@ class PagosController extends Controller {
 	{
 		$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
 										FROM stockholders sh, loans l
-										WHERE sh.id = l.stockholder_id');
+										WHERE sh.id = l.stockholder_id AND l.fuePagado = 0');
 
 		$prestamos = array();
 
@@ -85,6 +85,18 @@ class PagosController extends Controller {
 		$payment->save();
 
 		$loan = Loan::findOrFail($request->prestamo);
+
+		//pagos realizados
+		$pagos_realizados = 0;
+		foreach ($loan->payments as $payment){
+			$pagos_realizados += $payment->montoCapital;
+		}
+
+		if (round($loan->monto - $pagos_realizados) == 0){
+			$loan->fuePagado = 1;
+			$loan->save();
+		}
+
 		$stockholder = $loan->stockholder->name;
 		
 		//asiento correspondiente al pago
@@ -106,7 +118,7 @@ class PagosController extends Controller {
 		$asiento->descripcion = "Pago intereses préstamo " . $stockholder;
 		$asiento->payment_id = $payment->id;
 		$asiento->save();
-        
+
         return redirect('asientos');
 	}
 

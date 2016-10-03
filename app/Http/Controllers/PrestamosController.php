@@ -15,6 +15,7 @@ class PrestamosController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('admin', ['only' => ['create', 'store']]);
+		$this->middleware('checkloan', ['only' => ['store']]);
 	}
 
 	/**
