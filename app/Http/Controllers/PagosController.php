@@ -92,13 +92,13 @@ class PagosController extends Controller {
 			$pagos_realizados += $payment->montoCapital;
 		}
 
+		//si prestamo fue pagado en su totalidad se actualiza en la BD
 		if (round($loan->monto - $pagos_realizados) == 0){
 			$loan->fuePagado = 1;
 			$loan->save();
 		}
 
 		$stockholder = $loan->stockholder->name;
-		
 		//asiento correspondiente al pago
 		$asiento = new Accounting();
 		$asiento->debe = 'Banco';

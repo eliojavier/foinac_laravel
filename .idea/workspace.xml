@@ -4,10 +4,6 @@
     <list default="true" id="c4506a6f-c8eb-4c5c-9bee-cc92b9acb18d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PagosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PagosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Loan.php" afterPath="$PROJECT_DIR$/app/Loan.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/prestamos/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/prestamos/create.blade.php" />
     </list>
     <ignored path="foinacv2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,102 +48,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CheckLoan.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckLoan.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding>
-                <element signature="e#38#51#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PagosController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PagosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="54" column="90" selection-start-line="54" selection-start-column="90" selection-end-line="54" selection-end-column="90" />
+            <state relative-caret-position="119">
+              <caret line="100" column="48" selection-start-line="100" selection-start-column="48" selection-end-line="100" selection-end-column="48" />
               <folding>
-                <marker date="1475530400865" expanded="true" signature="659:1250" ph="SELECT stock... stockholders" />
-                <marker date="1475530400865" expanded="true" signature="1443:1590" ph="SELECT CONCA... stockholders" />
-                <marker date="1475530400865" expanded="true" signature="1443:1610" ph="SELECT CONCA... stockholders" />
+                <marker date="1475531277408" expanded="true" signature="659:1250" ph="SELECT stock... stockholders" />
+                <marker date="1475531277408" expanded="true" signature="1443:1590" ph="SELECT CONCA... stockholders" />
+                <marker date="1475531277408" expanded="true" signature="1443:1610" ph="SELECT CONCA... stockholders" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Loan.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Loan.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CheckPayment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckPayment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="31" selection-start-line="16" selection-start-column="8" selection-end-line="26" selection-end-column="31" />
-              <folding>
-                <element signature="e#38#51#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Payment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Payment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/prestamos/_form.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="52" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pagos/_form.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="52" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrestamosController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-187">
-              <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-              <folding>
-                <marker date="1475522437058" expanded="true" signature="589:1264" ph="SELECT loans... stockholders" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Kernel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -559,7 +469,7 @@
       <workItem from="1475071804375" duration="18566000" />
       <workItem from="1475158151837" duration="15888000" />
       <workItem from="1475245505893" duration="13791000" />
-      <workItem from="1475503150807" duration="17713000" />
+      <workItem from="1475503150807" duration="18582000" />
     </task>
     <task id="LOCAL-00001" summary="c">
       <created>1468961770801</created>
@@ -684,7 +594,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416156000" />
+    <option name="totallyTimeSpent" value="417025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1612" height="870" extended-state="0" />
@@ -1051,10 +961,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/prestamos/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+        <state relative-caret-position="238">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckPayment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckLoan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#38#51#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Loan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1063,14 +999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/prestamos/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1091,34 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckPayment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="31" selection-start-line="16" selection-start-column="8" selection-end-line="26" selection-end-column="31" />
-          <folding>
-            <element signature="e#38#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Loan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckLoan.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#38#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PrestamosController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-187">
@@ -1129,14 +1029,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PagosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="54" column="90" selection-start-line="54" selection-start-column="90" selection-end-line="54" selection-end-column="90" />
+        <state relative-caret-position="119">
+          <caret line="100" column="48" selection-start-line="100" selection-start-column="48" selection-end-line="100" selection-end-column="48" />
           <folding>
-            <marker date="1475530400865" expanded="true" signature="659:1250" ph="SELECT stock... stockholders" />
-            <marker date="1475530400865" expanded="true" signature="1443:1590" ph="SELECT CONCA... stockholders" />
-            <marker date="1475530400865" expanded="true" signature="1443:1610" ph="SELECT CONCA... stockholders" />
+            <marker date="1475531277408" expanded="true" signature="659:1250" ph="SELECT stock... stockholders" />
+            <marker date="1475531277408" expanded="true" signature="1443:1590" ph="SELECT CONCA... stockholders" />
+            <marker date="1475531277408" expanded="true" signature="1443:1610" ph="SELECT CONCA... stockholders" />
           </folding>
         </state>
       </provider>
