@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('acciones', 'AccionesController');
     Route::resource('prestamos', 'PrestamosController');
