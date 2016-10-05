@@ -13,68 +13,17 @@ use Illuminate\Support\Facades\Response;
 
 class ReportesController extends Controller {
 
-	public function acciones()
-	{
-		//$acciones = DB::select('SELECT MONTHNAME(fecha) AS month, COUNT(id) AS value FROM stocks GROUP BY MONTH(fecha)');
-		$acciones = Stock::find(1);
-		if(Request::ajax()){
-			return 'ok';
-		}
-		return "f";
-	}
-
 	public function graficos()
 	{
-//		$acciones = DB::select('SELECT MONTHNAME(fecha) AS month, COUNT(id) AS value FROM stocks GROUP BY MONTH(fecha)');
-		$acciones = Stock::all();
-		$stocks = Stock::groupby('stockholder_id')->select('id', DB::raw('count(*) as total'))->get();
-		//dd($acciones);
-		$rows = array();
-		foreach ($acciones as $accion){
-			$rows[] = $accion;
-		}
-		$response = array(
-			'status' => 'success',
-			'msg' => 'Setting created successfully',
+		dd("x");
+		$book = array(
+			"title" => "JavaScript: The Definitive Guide",
+			"author" => "David Flanagan",
+			"edition" => 6
 		);
-		$response = (json_encode($rows));
-		//dd(json_encode($response));
-		return Response::json($rows);
-		return view('reportes.acciones', compact('response'));
+		return view ('reportes.graficos', compact('book'));
 	}
-
-		//return Response::json($response);
-//		return Response::json([
-//			'status' => 'success',
-//			'response' => $response->toJson()
-//		]);
-
-//		return Response::json([
-//			'status' => 'success',
-//			'photos' => $photos->toJson(),
-//		]);
-//
-//		return Response::json($response);
-//		$rows = array();
-//		foreach ($acciones as $accion){
-//			$rows[] = $accion;
-//		}
-//		$a = array(['1'=>'2']);
-//		//return response()->json('ok', 200);
-//		$response = array(
-//			'status' => 'success',
-//			'msg' => 'Setting created successfully',
-//		);
-//
-//		//$response = (json_encode($rows));
-//		return Response::json($rows);
-//		//return json_encode($response);
-//
-//		return response()->json($response);
-//		//dd(json_encode($rows));
-//		//echo;
-
-
+	
 	/**
 	 * Display a listing of the resource.
 	 *

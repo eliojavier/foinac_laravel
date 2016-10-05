@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asientos/excel', 'ExcelController@index');
 });
 
-Route::get('reportes/acciones', 'ReportesController@graficos');
+Route::get('reportes/graficos', 'ReportesController@graficos');
 
 Route::get('/', 'SiteController@index');
 Route::get('home', 'SiteController@index');
