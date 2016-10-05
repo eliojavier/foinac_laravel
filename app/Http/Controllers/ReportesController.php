@@ -15,13 +15,12 @@ class ReportesController extends Controller {
 
 	public function graficos()
 	{
-		dd("x");
 		$book = array(
 			"title" => "JavaScript: The Definitive Guide",
 			"author" => "David Flanagan",
 			"edition" => 6
 		);
-		return view ('reportes.graficos', compact('book'));
+		return view ('reportes.graficos');
 	}
 	
 	/**
