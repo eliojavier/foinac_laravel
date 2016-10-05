@@ -23,6 +23,26 @@ class ReportesController extends Controller {
 		return "f";
 	}
 
+	public function graficos()
+	{
+//		$acciones = DB::select('SELECT MONTHNAME(fecha) AS month, COUNT(id) AS value FROM stocks GROUP BY MONTH(fecha)');
+		$acciones = Stock::all();
+		$stocks = Stock::groupby('stockholder_id')->select('id', DB::raw('count(*) as total'))->get();
+		//dd($acciones);
+		$rows = array();
+		foreach ($acciones as $accion){
+			$rows[] = $accion;
+		}
+		$response = array(
+			'status' => 'success',
+			'msg' => 'Setting created successfully',
+		);
+		$response = (json_encode($rows));
+		//dd(json_encode($response));
+		return Response::json($rows);
+		return view('reportes.acciones', compact('response'));
+	}
+
 		//return Response::json($response);
 //		return Response::json([
 //			'status' => 'success',
@@ -64,46 +84,40 @@ class ReportesController extends Controller {
 	{
 		//valores 30 septiembre
 		$TOTAL_ACCIONES = 0;
-		$TOTAL_INTERESES_PRESTAMOS = 0;
-		$TOTAL_INTERESES_BANCO = 0;
-		$TOTAL_GANANCIAS = 0;
+		$TOTAL_INTERESES_PRESTAMOS = 2590.5;//7568.38;
+		$TOTAL_INTERESES_BANCO = 2830.18;
+		$TOTAL_GANANCIAS = 1000;
 		$TOTAL_PRESTAMOS = 0;
-		$TOTAL_GASTOS = 0;
+		$TOTAL_PAGOS = 0;
+		$TOTAL_GASTOS = 21.6;
 
 		$TOTAL_ACCIONES += Stock::sum('monto');
-		$TOTAL_INTERESES_PRESTAMOS += Payment::sum('montoInteres');
 		$TOTAL_INTERESES_BANCO += BankInterest::sum('monto');
-		$TOTAL_GANANCIAS += Profit::sum('monto');
-		$TOTAL_PRESTAMOS += (Loan::sum('monto') - Payment::sum('montoCapital'));
 		$TOTAL_GASTOS += Expense::sum('monto');
+		$TOTAL_GANANCIAS += Profit::sum('monto');
+
+		$prestamos = Loan::where('fuePagado', 0)->get();
+
+		foreach ($prestamos as $prestamo){
+			$TOTAL_PRESTAMOS += $prestamo->monto;
+			foreach ($prestamo->payments as $payment){
+				$TOTAL_PAGOS += $payment->montoCapital;
+				$TOTAL_INTERESES_PRESTAMOS += $payment->montoInteres;
+			}
+		}
+		
+		$CUENTAS_POR_COBRAR =  $TOTAL_PRESTAMOS - $TOTAL_PAGOS;
 
 		$TOTAL_DISPONIBLE = + $TOTAL_ACCIONES
 							+ $TOTAL_INTERESES_PRESTAMOS
 							+ $TOTAL_INTERESES_BANCO
 							+ $TOTAL_GANANCIAS
+							+ $TOTAL_PAGOS
 							- $TOTAL_PRESTAMOS
 							- $TOTAL_GASTOS;
-		
 
 		return view('reportes/acciones', compact('TOTAL_ACCIONES', 'TOTAL_INTERESES_PRESTAMOS', 'TOTAL_INTERESES_BANCO',
-												'TOTAL_GANANCIAS', 'TOTAL_PRESTAMOS', 'TOTAL_GASTOS', 'TOTAL_DISPONIBLE'));
-//
-//		$acciones = DB::select('SELECT MONTHNAME(fecha) AS month, COUNT(id) AS value FROM stocks GROUP BY MONTH(fecha)');
-//		$acciones = Stock::all();
-//		$stocks = Stock::groupby('stockholder_id')->select('id', DB::raw('count(*) as total'))->get();
-//		//dd($acciones);
-//		$rows = array();
-//		foreach ($acciones as $accion){
-//			$rows[] = $accion;
-//		}
-//		$response = array(
-//			'status' => 'success',
-//			'msg' => 'Setting created successfully',
-//		);
-//		$response = (json_encode($rows));
-		//dd(json_encode($response));
-		//return Response::json($rows);
-		//return view('reportes.acciones', compact('response'));
+												'TOTAL_GANANCIAS', 'TOTAL_PRESTAMOS', 'TOTAL_GASTOS', 'CUENTAS_POR_COBRAR', 'TOTAL_DISPONIBLE'));
 	}
 
 	/**

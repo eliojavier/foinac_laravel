@@ -25,7 +25,7 @@ class AccionesController extends Controller {
 	{
         $result = DB::select('SELECT 	stockholders.id AS id, 
 										stockholders.name AS accionista, 
-										COUNT(stockholders.name) AS numacciones, 
+										(SUM(stocks.monto)/300) AS numacciones, 
 										SUM(stocks.monto) AS montoinversion
                                 FROM stockholders, stocks
                                 WHERE stockholders.id = stocks.stockholder_id
@@ -60,29 +60,28 @@ class AccionesController extends Controller {
 		]);
 		
 		$VALOR_ACCION = 300;
+		$MONTO = $VALOR_ACCION * $request->n_acciones;
+		
+		$stock = new Stock();
+		$stock->stockholder_id = $request->accionista;
+		$stock->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$stock->monto = $MONTO;
+		$stock->save();
 
-		for ($i=0;$i<$request->n_acciones; $i++) {
-			//se guarda cada acción
-			$stock = new Stock();
-			$stock->stockholder_id = $request->accionista;
-			$stock->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$stock->monto = $VALOR_ACCION;
-			$stock->save();
+		//nombre del accionista
+		$result = Stockholder::where('id', $request->accionista)->first(['name']);
+		$accionista = $result->name;
 
-			//nombre del accionista
-			$result = Stockholder::where('id', $request->accionista)->first(['name']);
-			$accionista = $result->name;
+		//asiento correspondiente
+		$asiento = new Accounting();
+		$asiento->debe = 'Banco';
+		$asiento->haber = 'Capital';
+		$asiento->monto = $MONTO;
+		$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
+		$asiento->descripcion = "Compra de " . $request->n_acciones . " acción(es) " . $accionista;
+		$asiento->stock_id = $stock->id;
+		$asiento->save();
 
-			//asiento correspondiente
-			$asiento = new Accounting();
-			$asiento->debe = 'Banco';
-			$asiento->haber = 'Capital';
-			$asiento->monto = $VALOR_ACCION;
-			$asiento->fecha = DateTime::createFromFormat('d/m/Y', $request->fecha)->format('Y-m-d');
-			$asiento->descripcion = "Compra de " . "acción " . $accionista;
-			$asiento->stock_id = $stock->id;
-			$asiento->save();
-		}
         return redirect('asientos');
 	}
 

@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 col-md-offset-3 col-sm-12 col-xs-12">
+            <div class="col-lg-8 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">Acciones</div>
                     <div class="panel-body">
@@ -22,7 +22,7 @@
                                 @foreach($result as $r)
                                     <tr data-id="{{$r->id}}">
                                         <td>{{$r->accionista}}</td>
-                                        <td>{{$r->numacciones}}</td>
+                                        <td>{{round($r->numacciones)}}</td>
                                         <td>{{$r->montoinversion}}</td>
                                     </tr>
                                 @endforeach

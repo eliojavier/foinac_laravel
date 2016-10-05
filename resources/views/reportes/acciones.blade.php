@@ -24,12 +24,16 @@
     <div class="form-group">
         {!!Form::label('','Total en préstamos: ')!!}
         {!!Form::label('',$TOTAL_PRESTAMOS)!!}
-        {{$TOTAL_PRESTAMOS}}
     </div>
 
     <div class="form-group">
         {!!Form::label('','Total gastos: ')!!}
         {{$TOTAL_GASTOS}}
+    </div>
+
+    <div class="form-group">
+        {!!Form::label('','Cuentas por cobrar: ')!!}
+        {{$CUENTAS_POR_COBRAR}}
     </div>
 
     <div class="form-group">
@@ -48,7 +52,7 @@
         $( document ).ready(function() {
             $('#bAcciones').click(function(){
                 $.ajax({
-                    url: '/reportes/acciones',
+                    url: 'reportes/acciones',
                     type: 'GET',
                     success:function(result)
                     {
