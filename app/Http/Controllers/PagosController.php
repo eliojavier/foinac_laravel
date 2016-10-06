@@ -50,14 +50,16 @@ class PagosController extends Controller {
 	 */
 	public function create()
 	{
-		$result = DB::select('SELECT CONCAT (sh.name, "--" , ROUND(l.monto,0)) AS prestamo, l.id
-										FROM stockholders sh, loans l
-										WHERE sh.id = l.stockholder_id AND l.fuePagado = 0');
-
+		$loans = Loan::where('fuePagado', 0)->get();
 		$prestamos = array();
-
-		foreach ($result as $r) {
-			$prestamos = array_add($prestamos, $r->id, $r->prestamo);
+		
+		foreach ($loans as $loan){
+			$pagos = 0;
+			foreach ($loan->payments as $payment){
+				$pagos += $payment->montoCapital;
+			}
+			$deuda = $loan->monto - $pagos;
+			$prestamos = array_add($prestamos, $loan->id, $loan->stockholder->name . "--" . $loan->fecha . "--" . $deuda);
 		}
 		return view('pagos/create', compact('prestamos'));
 	}

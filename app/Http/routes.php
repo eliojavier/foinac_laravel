@@ -22,15 +22,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('ganancias', 'GananciasController');
     Route::resource('asientos', 'AsientosController');
     
+    Route::get('misacciones', 'PerfilController@misacciones');
+    Route::get('misprestamos', 'PerfilController@misprestamos');
+    Route::get('misganancias', 'PerfilController@misganancias');
+    
     Route::get('reportes/graficos', 'ReportesController@graficos');
     Route::resource('reportes', 'ReportesController');
 
     Route::get('asientos/excel', 'ExcelController@index');
-
-    Route::get('graficos/reportes', 'GraficosController@reportes');
 });
-
-
 
 Route::get('/', 'SiteController@index');
 Route::get('home', 'SiteController@index');

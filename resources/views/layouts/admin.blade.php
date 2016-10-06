@@ -46,33 +46,6 @@
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown">
-                    <li>
-                        <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">View All</a>
-                    </li>
-                </ul>
-            </li>
             @if (Auth::guest())
                 <li class="dropdown">
                     <li><a href="{{ url('/auth/login') }}">Iniciar sesión</a></li>
@@ -83,13 +56,13 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-lock" aria-hidden="true"></i>  {{ Auth::user()->name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="{{ url('misacciones') }}"><i class="fa fa-fw fa-user"></i> Mis Acciones</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        <a href="{{ url('misprestamos') }}"><i class="fa fa-fw fa-envelope"></i> Mis préstamos</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a href="{{ url('misganancias') }}"><i class="fa fa-fw fa-gear"></i> Mis ganancias</a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-fw fa-power-off"></i>Cerrar Sesión</a></li>
