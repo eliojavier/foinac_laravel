@@ -16,6 +16,7 @@ class ExcelController extends Controller {
 	 */
 	public function index()
 	{
+		dd("X");
 //		Excel::create('Laravel Excel', function ($excel){
 //			$excel->sheet('Asientos', function($sheet){
 //				$asientos = Accounting::all();

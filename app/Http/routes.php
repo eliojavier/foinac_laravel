@@ -18,15 +18,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('interesesbanco', 'InteresBancoController');
     Route::resource('comprasdivisas', 'ComprasDivisasController');
     Route::resource('ventasdivisas', 'VentasDivisasController');
-    Route::resource('asientos', 'AsientosController');
-    Route::resource('reportes', 'ReportesController');
     Route::resource('gastos', 'GastosController');
     Route::resource('ganancias', 'GananciasController');
+    Route::resource('asientos', 'AsientosController');
+    
+    Route::get('reportes/graficos', 'ReportesController@graficos');
+    Route::resource('reportes', 'ReportesController');
 
     Route::get('asientos/excel', 'ExcelController@index');
+
+    Route::get('graficos/reportes', 'GraficosController@reportes');
 });
 
-Route::get('reportes/graficos', 'ReportesController@graficos');
+
 
 Route::get('/', 'SiteController@index');
 Route::get('home', 'SiteController@index');

@@ -249,12 +249,14 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"> </script>
 <script src="{{asset('/js/datepicker.js')}}" ></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="{{ asset('/js/plugins/morris/raphael.min.js') }}"> </script>
+<script src="{{ asset('/js/plugins/morris/morris.min.js') }}"> </script>
+<script src="{{ asset('/js/plugins/morris/morris-data.js') }}"> </script>
 @yield('scripts')
 
-{{--<!-- Morris Charts JavaScript -->--}}
-{{--<script src="{{ asset('/js/plugins/morris/raphael.min.js') }}"> </script>--}}
-{{--<script src="{{ asset('/js/plugins/morris/morris.min.js') }}"> </script>--}}
-{{--<script src="{{ asset('/js/plugins/morris/morris-data.js') }}"> </script>--}}
+
 
 {{--<!-- jQuery -->--}}
 {{--<script src="{{asset('/js/jquery-1.12.4.js')}}" ></script>--}}

@@ -3,10 +3,7 @@
 use App\BankInterest;
 use App\Expense;
 use App\Loan;
-use App\Payment;
 use App\Profit;
-use Illuminate\Support\Facades\Request;
-
 use App\Http\Requests;
 use App\Stock;
 use Illuminate\Support\Facades\Response;
@@ -16,11 +13,16 @@ class ReportesController extends Controller {
 	public function graficos()
 	{
 		$book = array(
-			"title" => "JavaScript: The Definitive Guide",
+			"year" => "JavaScript: The Definitive Guide",
 			"author" => "David Flanagan",
 			"edition" => 6
 		);
-		return view ('reportes.graficos');
+//		{ year: '2008', value: 20 },
+//		{ year: '2009', value: 10 },
+//		{ year: '2010', value: 5 },
+//		{ year: '2011', value: 5 },
+//		{ year: '2012', value: 20 }
+		return view ('reportes.graficos', compact('book'));
 	}
 	
 	/**
@@ -32,7 +34,7 @@ class ReportesController extends Controller {
 	{
 		//valores 30 septiembre
 		$TOTAL_ACCIONES = 0;
-		$TOTAL_INTERESES_PRESTAMOS = 2590.5;//7568.38;
+		$TOTAL_INTERESES_PRESTAMOS = 3129.38;//7568.38;
 		$TOTAL_INTERESES_BANCO = 2830.18;
 		$TOTAL_GANANCIAS = 1000;
 		$TOTAL_PRESTAMOS = 0;
