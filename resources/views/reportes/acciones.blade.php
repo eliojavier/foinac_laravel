@@ -22,11 +22,6 @@
     </div>
 
     <div class="form-group">
-        {!!Form::label('','Total en préstamos: ')!!}
-        {!!Form::label('',$TOTAL_PRESTAMOS)!!}
-    </div>
-
-    <div class="form-group">
         {!!Form::label('','Total gastos: ')!!}
         {{$TOTAL_GASTOS}}
     </div>

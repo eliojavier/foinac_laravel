@@ -34,7 +34,7 @@ class ReportesController extends Controller {
 	{
 		//valores 30 septiembre
 		$TOTAL_ACCIONES = 0;
-		$TOTAL_INTERESES_PRESTAMOS = 3129.38;//7568.38;
+		$TOTAL_INTERESES_PRESTAMOS = 5979.38; //3129.38;//7568.38;
 		$TOTAL_INTERESES_BANCO = 2830.18;
 		$TOTAL_GANANCIAS = 1000;
 		$TOTAL_PRESTAMOS = 0;
@@ -67,7 +67,7 @@ class ReportesController extends Controller {
 							- $TOTAL_GASTOS;
 
 		return view('reportes/acciones', compact('TOTAL_ACCIONES', 'TOTAL_INTERESES_PRESTAMOS', 'TOTAL_INTERESES_BANCO',
-												'TOTAL_GANANCIAS', 'TOTAL_PRESTAMOS', 'TOTAL_GASTOS', 'CUENTAS_POR_COBRAR', 'TOTAL_DISPONIBLE'));
+												'TOTAL_GANANCIAS', 'TOTAL_GASTOS', 'CUENTAS_POR_COBRAR', 'TOTAL_DISPONIBLE'));
 	}
 
 	/**
