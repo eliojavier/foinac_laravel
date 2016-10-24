@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use App\Http\Controllers\PrestamosController;
 use App\Loan;
 use App\Stock;
 use Closure;
@@ -34,7 +35,7 @@ class CheckLoan {
 		$monto_disponible = (2 * $monto_inversion) - ($monto_prestamos - $monto_pagos);
 
 		if ($request->monto > $monto_disponible)
-			return redirect ('prestamos/create')->with('status', 'Monto solicitado excede disponible para préstamo');
+			return redirect ('prestamos/create')->with('status', 'Monto disponible para préstamo es de ' . $monto_disponible . ' BsF.');
 		return $next($request);
 	}
 

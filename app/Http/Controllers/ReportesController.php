@@ -12,6 +12,11 @@ class ReportesController extends Controller {
 
 	public function graficos()
 	{
+//		$bank_interests = BankInterest::lists('monto', 'fecha');
+//		dd($bank_interests);
+//		$bank_interests = BankInterest::get(['monto', 'fecha']);
+//		$x = $bank_interests->toJson();
+//		dd($x);
 		$book = array(
 			"year" => "JavaScript: The Definitive Guide",
 			"author" => "David Flanagan",
@@ -24,7 +29,19 @@ class ReportesController extends Controller {
 //		{ year: '2012', value: 20 }
 		return view ('reportes.graficos', compact('book'));
 	}
-	
+
+	public function interesesBanco()
+	{
+
+		$bank_interests = BankInterest::get(['fecha', 'monto'])->toJson();
+		return response()->json([
+			$bank_interests
+		], 200);
+//		return response()->json([
+//			'name' => 'Abigail',
+//			'state' => 'CA'
+//		], 200);
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
