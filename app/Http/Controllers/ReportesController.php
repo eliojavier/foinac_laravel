@@ -27,20 +27,19 @@ class ReportesController extends Controller {
 //		{ year: '2010', value: 5 },
 //		{ year: '2011', value: 5 },
 //		{ year: '2012', value: 20 }
-		return view ('reportes.graficos', compact('book'));
+//		return view ('reportes.graficos', compact('book'));
+		return view ('reportes/graficos');
 	}
 
 	public function interesesBanco()
 	{
+		$bank_interests = BankInterest::get(['fecha', 'monto'])->toJSON();
+		return $bank_interests;
+	}
 
-		$bank_interests = BankInterest::get(['fecha', 'monto'])->toJson();
-		return response()->json([
-			$bank_interests
-		], 200);
-//		return response()->json([
-//			'name' => 'Abigail',
-//			'state' => 'CA'
-//		], 200);
+	public function accionistas()
+	{
+		
 	}
 	/**
 	 * Display a listing of the resource.

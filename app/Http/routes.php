@@ -25,9 +25,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('misacciones', 'PerfilController@misacciones');
     Route::get('misprestamos', 'PerfilController@misprestamos');
     Route::get('misganancias', 'PerfilController@misganancias');
-    
+
     Route::get('reportes/graficos', 'ReportesController@graficos');
-    Route::get('reportes/interesesBanco', 'ReportesController@interesesBanco');
+    Route::get('reportes/interesesbanco', 'ReportesController@interesesBanco');
+    Route::get('reportes/accionistas', 'ReportesController@accionistas');
+    
+
     Route::resource('reportes', 'ReportesController');
 
     Route::get('asientos/excel', 'ExcelController@index');
